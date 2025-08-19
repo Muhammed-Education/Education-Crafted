@@ -734,58 +734,7 @@ html {
 }
 
 
-/* WhatsApp Button Styles */
-.whatsapp-item .whatsapp-btn {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.3s ease;
-    padding: 10px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #25D366, #128C7E);
-    color: white;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-}
 
-.whatsapp-item .whatsapp-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-    background: linear-gradient(135deg, #128C7E, #25D366);
-}
-
-.whatsapp-item .whatsapp-btn i {
-    font-size: 2.5rem;
-    margin-left: 15px;
-    animation: pulse 2s infinite;
-}
-
-.whatsapp-item .whatsapp-btn h4 {
-    color: white;
-    margin-bottom: 5px;
-}
-
-.whatsapp-item .whatsapp-btn p {
-    color: rgba(255, 255, 255, 0.9);
-}
-
-/* Animation Effects */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 @keyframes slideInLeft {
     from {
