@@ -5,61 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Education Crafted - شريكك في تصميم محتوى تعليمي يحقق الأثر</title>
 
-  <!-- خطوط وأيقونات -->
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
-  <!-- ملف التنسيقات الخاص بك -->
   <link rel="stylesheet" href="styles.css"/>
-
-  <!-- سكرول سلس بديل (اختياري) -->
-  <style>
-    html{scroll-behavior:smooth}
-    body{font-family:"Tajawal",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
-    /* كلاسات بسيطة لو ما كانتش موجودة عندك في styles.css */
-    .header{position:sticky;top:0;z-index:100;background:#fff}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px}
-    .nav-menu{display:flex;gap:18px;list-style:none;margin:0;padding:0}
-    .nav-menu a{color:#222;text-decoration:none;font-weight:600}
-    .cta-btn,.btn-primary,.btn-secondary{border:0;padding:10px 18px;border-radius:24px;cursor:pointer;font-weight:700}
-    .cta-btn,.btn-primary{background:#f39c12;color:#fff}
-    .btn-secondary{background:#fff;border:2px solid #0ea5e9;color:#0ea5e9}
-    .hero{background:linear-gradient(135deg,#0ea5e9 0%,#1d4ed8 60%);color:#fff;padding:64px 0}
-    .container{max-width:1150px;margin:0 auto;padding:0 20px}
-    .hero-content{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:center}
-    .hero-text h1{font-size:48px;line-height:1.25;margin:0 0 12px}
-    .hero-text p{opacity:.95;margin:0 0 18px}
-    .hero-buttons{display:flex;gap:12px}
-    .section-subtitle{opacity:.8;margin:4px 0 22px}
-    .services,.features,.process,.contact,.problem-section{padding:64px 0;background:#fff}
-    .stats-grid,.services-grid,.features-grid,.process-steps{display:grid;gap:16px}
-    .stats-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-    .services-grid,.features-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .process-steps{grid-template-columns:repeat(4,minmax(0,1fr))}
-    .card,.stat-card,.service-card,.feature-card,.step,.contact-item{background:#fff;border:1px solid #eef2f7;border-radius:16px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
-    .contact-content{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    .contact-form .form-group{display:flex;flex-direction:column;margin-bottom:14px}
-    .contact-form input,.contact-form textarea{border:1px solid #dbe3ee;border-radius:10px;padding:10px}
-    .footer{background:#0f172a;color:#e5e7eb;padding:26px 0;margin-top:48px}
-    .footer a{color:#e5e7eb;text-decoration:none}
-    @media (max-width:960px){
-      .hero-content,.contact-content{grid-template-columns:1fr}
-      .stats-grid{grid-template-columns:repeat(2,1fr)}
-      .services-grid,.features-grid,.process-steps{grid-template-columns:1fr}
-    }
-  </style>
 </head>
 <body>
 
   <!-- الهيدر -->
   <header class="header">
-    <nav class="nav">
+    <nav class="nav" role="navigation" aria-label="القائمة الرئيسية">
       <div class="nav-brand">
         <strong style="font-size:20px">Education Crafted</strong>
         <div class="tagline" style="font-size:12px;opacity:.7">شريكك في التميز التعليمي</div>
       </div>
 
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="mainMenu" aria-hidden="true">
         <li><a href="#home">الرئيسية</a></li>
         <li><a href="#services">خدماتنا</a></li>
         <li><a href="#features">لماذا نحن</a></li>
@@ -67,14 +27,16 @@
         <li><a href="#contact">تواصل معنا</a></li>
       </ul>
 
-      <!-- زر ابدأ مشروعك -->
       <button class="cta-btn" data-scroll="#contact">ابدأ مشروعك</button>
 
-      <!-- زر منيو الموبايل (لو عندك ستايل له) -->
-      <div class="mobile-menu-toggle" aria-label="إظهار القائمة" role="button" tabindex="0">
+      <!-- زر منيو الموبايل -->
+      <button class="mobile-menu-toggle" aria-controls="mainMenu" aria-expanded="false" aria-label="فتح القائمة">
         <span></span><span></span><span></span>
-      </div>
+      </button>
     </nav>
+
+    <!-- الخلفية المعتمة للقائمة -->
+    <div class="nav-overlay" aria-hidden="true"></div>
   </header>
 
   <!-- البطل -->
@@ -84,13 +46,11 @@
         <div class="hero-text">
           <h1>شريكك في تصميم محتوى تعليمي رقمي <span class="highlight" style="color:#fbbf24">يحقق الأثر</span></h1>
           <p>نقدّم حلولًا متكاملة لتطوير المحتوى التعليمي والإلكتروني للشركات والمدربين؛ من التحليل والتصميم إلى الإنتاج وقياس الأثر.</p>
-
           <div class="hero-buttons">
             <button class="btn-primary"  data-scroll="#services">اكتشف خدماتنا</button>
             <button class="btn-secondary" data-scroll="#contact">تواصل معنا</button>
           </div>
         </div>
-
         <div class="hero-image">
           <img src="hero-image.jpg" alt="التعلم الرقمي والمحتوى التعليمي" style="width:100%;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.25)"/>
         </div>
@@ -103,14 +63,12 @@
     <div class="container">
       <h2>لماذا تحتاج إلى محتوى تعليمي متخصص؟</h2>
       <p class="section-subtitle">نحن نفهم التحديات التي تواجهها في إنشاء محتوى فعّال ومؤثر.</p>
-
       <div class="stats-grid">
         <div class="stat-card fade-in"><h3>70%</h3><p>من المؤسسات تفتقر لخبرة التصميم التعليمي.</p></div>
         <div class="stat-card fade-in"><h3>65%</h3><p>من المتعلمين لا يكملون الدورات غير التفاعلية.</p></div>
         <div class="stat-card fade-in"><h3>80%</h3><p>من الشركات تحتاج إلى قياس أثر التدريب.</p></div>
         <div class="stat-card fade-in"><h3>90%</h3><p>من المحتوى التقليدي لا يحقق الأهداف المطلوبة.</p></div>
       </div>
-
       <div class="solution-text" style="margin-top:18px">
         <p>نصمم لك حلولًا تعليمية قابلة للتطبيق تركّز على أهداف المتعلم والنتائج المتوقعة في عملك.</p>
         <button class="btn-primary" data-scroll="#contact">ابدأ معنا اليوم</button>
@@ -123,7 +81,6 @@
     <div class="container">
       <h2>خدماتنا</h2>
       <p class="section-subtitle">حلول شاملة من التحليل والتصميم وحتى الإنتاج وقياس الأثر.</p>
-
       <div class="services-grid">
         <div class="service-card fade-in">
           <div class="service-icon"><i class="fas fa-pen-fancy"></i></div>
@@ -135,7 +92,6 @@
             <li>كتب إلكترونية تفاعلية</li>
           </ul>
         </div>
-
         <div class="service-card fade-in">
           <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
           <h3>المحتوى الإلكتروني</h3>
@@ -181,39 +137,31 @@
     <div class="container">
       <h2>تواصل معنا</h2>
       <p class="section-subtitle">ابدأ مشروعك التعليمي الآن.</p>
-
       <div class="contact-content">
-        <!-- نموذج Netlify -->
         <div class="contact-form">
           <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="success.html">
             <input type="hidden" name="form-name" value="contact" />
             <input type="hidden" name="bot-field" />
-
             <div class="form-group">
               <label for="name">الاسم الكامل</label>
               <input id="name" name="name" type="text" required />
             </div>
-
             <div class="form-group">
               <label for="email">البريد الإلكتروني</label>
               <input id="email" name="email" type="email" required />
             </div>
-
             <div class="form-group">
               <label for="phone">رقم الهاتف (اختياري)</label>
               <input id="phone" name="phone" type="tel" />
             </div>
-
             <div class="form-group">
               <label for="message">رسالتك</label>
               <textarea id="message" name="message" rows="5" required></textarea>
             </div>
-
             <button type="submit" class="btn-primary">إرسال الرسالة</button>
           </form>
         </div>
 
-        <!-- معلومات التواصل -->
         <div class="contact-info">
           <div class="contact-item fade-in">
             <a href="mailto:mu.3coo@gmail.com" style="text-decoration:none;color:inherit">
@@ -221,14 +169,12 @@
               <div><h4>البريد</h4><p>mu.3coo@gmail.com</p></div>
             </a>
           </div>
-
           <div class="contact-item fade-in">
             <a href="https://wa.me/201097833578?text=مرحباً، أريد الاستفسار عن خدماتكم" target="_blank" style="text-decoration:none;color:inherit">
               <i class="fab fa-whatsapp"></i>
               <div><h4>واتساب</h4><p>+201097833578</p></div>
             </a>
           </div>
-
           <div class="contact-item fade-in">
             <i class="fas fa-clock"></i>
             <div><h4>ساعات العمل</h4><p>الأحد - الخميس: 9:00 ص - 6:00 م</p></div>
@@ -264,7 +210,6 @@
     <div style="text-align:center;margin-top:12px;color:#cbd5e1">© 2025 جميع الحقوق محفوظة</div>
   </footer>
 
-  <!-- سكربت التفاعل -->
   <script src="script.js"></script>
 </body>
 </html>
