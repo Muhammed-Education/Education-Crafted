@@ -35,13 +35,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Hero buttons functionality
-    const heroButtons = document.querySelectorAll('.hero-buttons .btn-primary, .hero-buttons .btn-secondary');
+    const heroButtons = document.querySelectorAll(".hero-buttons .btn-primary, .hero-buttons .btn-secondary");
     heroButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            if (this.textContent.includes('اكتشف خدماتنا')) {
-                document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
-            } else if (this.textContent.includes('تواصل معنا')) {
-                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        button.addEventListener("click", function() {
+            let targetId;
+            if (this.textContent.includes("اكتشف خدماتنا")) {
+                targetId = "services";
+            } else if (this.textContent.includes("تواصل معنا")) {
+                targetId = "contact";
+            }
+            if (targetId) {
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    const headerHeight = document.querySelector(".header").offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: "smooth"
+                    });
+                }
             }
         });
     });
