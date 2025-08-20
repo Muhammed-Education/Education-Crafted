@@ -41,8 +41,8 @@
                     <h1>شريكك في تصميم محتوى تعليمي رقمي <span class="highlight">يحقق الأثر</span></h1>
                     <p>نقدم حلولاً متكاملة لتطوير المحتوى التعليمي والإلكتروني للشركات والمدربين، من التحليل والتصميم إلى الإنتاج وقياس الأثر</p>
                     <div class="hero-buttons">
-                        <button class="btn-primary">اكتشف خدماتنا</button>
-                        <button class="btn-secondary">تواصل معنا</button>
+                        <a href="#services" class="btn-primary">اكتشف خدماتنا</a>
+                        <a href="#contact" class="btn-secondary">تواصل معنا</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -118,7 +118,7 @@
                     </div>
                     <h3>إنشاء المحتوى الإلكتروني</h3>
                     <ul>
-                        <li>تطوير الدورات التفاعلية (E-learning)</li>
+                        <li>تطوير الدورات التفاعلية (E-learning )</li>
                         <li>إنتاج الفيديوهات التعليمية</li>
                         <li>إنشاء المحتوى التفاعلي (اختبارات - ألعاب - محاكاة)</li>
                         <li>إدارة منصات التعلم (LMS)</li>
@@ -203,7 +203,9 @@
             <p class="section-subtitle">ابدأ مشروعك التعليمي معنا اليوم</p>
             <div class="contact-content">
                 <div class="contact-form">
-                    <form name="contact" method="POST" data-netlify="true" action="/success">
+                    <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/success.html">
+                        <input type="hidden" name="form-name" value="contact">
+                        <p class="hidden"><label>لا تملأ هذا الحقل: <input name="bot-field"></label></p>
                         <div class="form-group">
                             <label for="name">الاسم الكامل</label>
                             <input type="text" id="name" name="name" required>
@@ -287,5 +289,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
