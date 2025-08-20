@@ -19,27 +19,16 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Smooth scrolling for hero buttons
-    document.querySelectorAll(".hero-buttons .btn-primary").forEach(button => {
+    document.querySelectorAll(".hero-buttons .btn-primary, .hero-buttons .btn-secondary").forEach(button => {
         button.addEventListener("click", function(e) {
             e.preventDefault();
-            const targetElement = document.getElementById("services"); // Target the services section
-            if (targetElement) {
-                const headerOffset = document.querySelector(".header").offsetHeight;
-                const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = elementPosition - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
+            let targetId;
+            if (this.classList.contains("btn-primary")) {
+                targetId = "services"; // 'اكتشف خدماتنا' goes to services
+            } else {
+                targetId = "contact"; // 'تواصل معنا' goes to contact
             }
-        });
-    });
-
-    document.querySelectorAll(".hero-buttons .btn-secondary").forEach(button => {
-        button.addEventListener("click", function(e) {
-            e.preventDefault();
-            const targetElement = document.getElementById("contact"); // Target the contact section
+            const targetElement = document.getElementById(targetId);
             if (targetElement) {
                 const headerOffset = document.querySelector(".header").offsetHeight;
                 const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
@@ -58,51 +47,31 @@ document.addEventListener("DOMContentLoaded", function() {
     const navMenu = document.querySelector(".nav-menu");
 
     if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener("click", function() {
+        mobileMenuToggle.addEventListener("click", () => {
             navMenu.classList.toggle("active");
-            mobileMenuToggle.classList.toggle("active");
-        });
-
-        // Close mobile menu when a link is clicked
-        navMenu.querySelectorAll("a").forEach(link => {
-            link.addEventListener("click", function() {
-                navMenu.classList.remove("active");
-                mobileMenuToggle.classList.remove("active");
-            });
         });
     }
 
-    // Typing effect for hero title
-    const heroTitle = document.querySelector(".hero-text h1");
-    if (heroTitle) {
-        const originalText = heroTitle.innerHTML;
-        heroTitle.innerHTML = ""; // Clear content initially
-        let i = 0;
-        function typeWriter() {
-            if (i < originalText.length) {
-                heroTitle.innerHTML += originalText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50); // Typing speed
-            }
-        }
-        // Start typing after a delay
-        setTimeout(typeWriter, 1000);
-    }
+    // Close mobile menu when a link is clicked
+    navMenu.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            navMenu.classList.remove("active");
+        });
+    });
 
-    // Intersection Observer for fade-in-slide-up animation
+    // Animations on scroll
     const fadeInElements = document.querySelectorAll(
-        ".problem-section h2, .problem-section .section-subtitle, .stat-card,"
-        + ".solution-text p, .solution-text .btn-primary,"
-        + ".services h2, .services .section-subtitle, .service-card,"
-        + ".features h2, .feature-card,"
-        + ".process h2, .step,"
-        + ".contact h2, .contact .section-subtitle, .contact-form, .contact-item"
+        ".problem-section h2, .problem-section .section-subtitle, .stat-card, " +
+        ".services h2, .services .section-subtitle, .service-card, " +
+        ".features h2, .feature-card, " +
+        ".process h2, .step, " +
+        ".contact h2, .contact .section-subtitle, .contact-item"
     );
 
     const observerOptions = {
-        root: null, // viewport
+        root: null,
         rootMargin: "0px",
-        threshold: 0.1 // Trigger when 10% of the element is visible
+        threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
