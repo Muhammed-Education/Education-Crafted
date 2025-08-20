@@ -1,23 +1,48 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Mobile Menu Toggle
+document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
     const navMenu = document.querySelector(".nav-menu");
-    
+
     if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener("click", function() {
-            navMenu.classList.toggle("active");
-            this.classList.toggle("active");
+        mobileMenuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            this.classList.toggle('active');
         });
     }
 
     // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll(".nav-menu a, .footer-links a, .hero-buttons a, .cta-btn");
+    const navLinks = document.querySelectorAll(".nav-menu a, .footer-links a");
     navLinks.forEach(link => {
-        link.addEventListener("click", function(e) {
-            const href = this.getAttribute("href");
-            if (href && href.startsWith("#")) {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href.startsWith('#')) {
                 e.preventDefault();
                 const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    const headerHeight = document.querySelector(".header").offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+                navMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+            }
+        });
+    });
+
+    // Hero buttons functionality
+    const heroButtons = document.querySelectorAll(".hero-buttons .btn-primary, .hero-buttons .btn-secondary");
+    heroButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            let targetId;
+            if (this.textContent.includes("اكتشف خدماتنا")) {
+                targetId = "services";
+            } else if (this.textContent.includes("تواصل معنا")) {
+                targetId = "contact";
+            }
+            if (targetId) {
                 const targetElement = document.getElementById(targetId);
                 if (targetElement) {
                     const headerHeight = document.querySelector(".header").offsetHeight;
@@ -27,14 +52,39 @@ document.addEventListener("DOMContentLoaded", function() {
                         behavior: "smooth"
                     });
                 }
-                // Close mobile menu if open
-                if (navMenu.classList.contains("active")) {
-                    navMenu.classList.remove("active");
-                    mobileMenuToggle.classList.remove("active");
-                }
             }
         });
     });
+
+    // CTA buttons functionality
+    const ctaButtons = document.querySelectorAll(".cta-btn, .solution-text .btn-primary");
+    ctaButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // ✅ Netlify Form AJAX Submit
+    const contactForm = document.querySelector("form[name='contact']");
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(contactForm);
+
+            fetch("/", {
+                method: "POST",
+                body: formData,
+            })
+            .then(() => {
+                alert("🎉 تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.");
+                contactForm.reset();
+            })
+            .catch(() => {
+                alert("⚠️ حدث خطأ أثناء إرسال الرسالة، حاول مرة أخرى.");
+            });
+        });
+    }
 
     // Scroll animations
     const observerOptions = {
@@ -50,7 +100,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }, observerOptions);
 
-    // Add fade-in class to elements and observe them
     const animateElements = document.querySelectorAll(".stat-card, .service-card, .feature-card, .step, .contact-item");
     animateElements.forEach(el => {
         el.classList.add('fade-in');
@@ -69,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Counter animation for statistics
+    // Counter animation
     const counters = document.querySelectorAll(".stat-card h3");
     const counterObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
@@ -95,8 +144,8 @@ document.addEventListener("DOMContentLoaded", function() {
         counterObserver.observe(counter);
     });
 
-    // Add hover effects to cards
-    const cards = document.querySelectorAll(".stat-card, .service-card, .feature-card, .contact-item");
+    // Hover effects
+    const cards = document.querySelectorAll(".stat-card, .service-card, .feature-card");
     cards.forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px) scale(1.02)';
@@ -106,60 +155,4 @@ document.addEventListener("DOMContentLoaded", function() {
             this.style.transform = 'translateY(0) scale(1)';
         });
     });
-
-    // Parallax effect for hero section
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const heroImage = document.querySelector(".hero-image img");
-        if (heroImage) {
-            heroImage.style.transform = `translateY(${scrolled * 0.2}px)`;
-        }
-    });
-
-    // Ripple effect for buttons
-    const buttons = document.querySelectorAll('button, .btn-primary, .btn-secondary');
-    buttons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            // Check if the click is for a smooth scroll link
-            const href = this.getAttribute('href');
-            if (href && href.startsWith('#')) {
-                return; // Don't create ripple for smooth scroll links
-            }
-
-            const x = e.clientX - e.target.offsetLeft;
-            const y = e.clientY - e.target.offsetTop;
-
-            const ripple = document.createElement('span');
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
-            ripple.classList.add('ripple');
-            this.appendChild(ripple);
-
-            ripple.addEventListener('animationend', function() {
-                ripple.remove();
-            });
-        });
-    });
-
-    // Typing Animation for Hero Title
-    function typeWriter(element, text, speed = 100) {
-        let i = 0;
-        element.innerHTML = '';
-        
-        function type() {
-            if (i < text.length) {
-                element.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            }
-        }
-        type();
-    }
-
-    const heroTitle = document.querySelector('.hero-text h1');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        heroTitle.textContent = ''; // Clear text before typing
-        typeWriter(heroTitle, originalText, 70);
-    }
 });
