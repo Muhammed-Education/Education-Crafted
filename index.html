@@ -4,102 +4,97 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Education Crafted - شريكك في التميز التعليمي</title>
-  
-  <!-- أيقونة الموقع (favicon) -->
-  <link rel="icon" type="image/png" href="favicon.png">
 
-  <!-- ملف CSS -->
+  <!-- أيقونات التبويب -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- ملفات CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- الهيدر -->
   <header class="header">
-    <div class="container">
-      <a href="index.html" class="logo">
-        <img src="favicon.png" alt="Education Crafted Logo" class="logo-img">
+    <nav class="nav container">
+      <a class="logo" href="index.html">
+        <img src="favicon.png" alt="Education Crafted" style="width:28px;height:28px;border-radius:6px;vertical-align:middle">
         <span>Education Crafted</span>
       </a>
-      <nav class="nav-menu">
-        <ul>
-          <li><a href="#hero">الرئيسية</a></li>
-          <li><a href="#services">خدماتنا</a></li>
-          <li><a href="#about">لماذا نحن</a></li>
-          <li><a href="#process">آلية العمل</a></li>
-          <li><a href="#contact">تواصل معنا</a></li>
-        </ul>
-      </nav>
+      <ul class="nav-menu">
+        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="#services">خدماتنا</a></li>
+        <li><a href="#about">لماذا نحن</a></li>
+        <li><a href="#process">آلية العمل</a></li>
+        <li><a href="#contact">تواصل معنا</a></li>
+      </ul>
+      <!-- زر القائمة في الموبايل -->
       <button class="mobile-menu-toggle" aria-label="القائمة">
-        ☰
+        <span></span><span></span><span></span>
       </button>
-    </div>
+    </nav>
   </header>
 
-  <!-- صورة الخلفية -->
-  <section id="hero" class="hero">
-    <div class="container hero-content">
-      <div class="hero-image">
-        <img src="hero-image.jpg" alt="تعليم رقمي">
+  <!-- سكشن البداية -->
+  <section id="home" class="hero container">
+    <div class="hero-content">
+      <h1>
+        شريكك في تصميم محتوى تعليمي رقمي <span class="highlight">يحقق الأثر</span>
+      </h1>
+      <p>
+        نقدم حلولاً متكاملة لتطوير المحتوى التعليمي والإلكتروني للشركات والمدربين: 
+        من التحليل والتصميم إلى الإنتاج وقياس الأثر.
+      </p>
+      <div class="hero-buttons">
+        <a href="#services" class="btn btn-primary">اكتشف خدماتنا</a>
+        <a href="#contact" class="btn btn-secondary">تواصل معنا</a>
+        <a href="success.html" class="btn btn-outline">ابدأ مشروعك</a>
       </div>
-      <div class="hero-text">
-        <h1>شريكك في تصميم محتوى تعليمي رقمي <span class="highlight">يحقق الأثر</span></h1>
-        <p>نقدّم حلولًا متكاملة لتطوير المحتوى التعليمي والإلكتروني للشركات والمدربين؛ من التحليل والتصميم إلى الإنتاج وقياس الأثر</p>
-        <div class="hero-buttons">
-          <a href="#services" class="btn btn-primary" data-scroll="#services">اكتشف خدماتنا</a>
-          <a href="#contact" class="btn btn-secondary" data-scroll="#contact">تواصل معنا</a>
-          <a href="#projects" class="btn btn-accent" data-scroll="#projects">ابدأ مشروعك</a>
-        </div>
-      </div>
+    </div>
+    <div class="hero-image">
+      <img src="hero-image.jpg" alt="تصميم محتوى تعليمي">
     </div>
   </section>
 
-  <!-- خدماتنا -->
-  <section id="services" class="services">
-    <div class="container">
-      <h2>خدماتنا</h2>
-      <p>تفاصيل عن الخدمات...</p>
-    </div>
+  <!-- سكشن الخدمات -->
+  <section id="services" class="services container">
+    <h2>خدماتنا</h2>
+    <p>نوفر لك حلولًا تعليمية رقمية متكاملة</p>
+    <img src="services-image.jpg" alt="خدماتنا">
   </section>
 
-  <!-- لماذا نحن -->
-  <section id="about" class="about">
-    <div class="container">
-      <h2>لماذا نحن</h2>
-      <p>تفاصيل عن لماذا نحن...</p>
-    </div>
+  <!-- سكشن لماذا نحن -->
+  <section id="about" class="about container">
+    <h2>لماذا نحن؟</h2>
+    <p>لأننا نقدم قيمة حقيقية تعزز تجربة التعلم.</p>
+    <img src="about-image.jpg" alt="لماذا نحن">
   </section>
 
-  <!-- آلية العمل -->
-  <section id="process" class="process">
-    <div class="container">
-      <h2>آلية العمل</h2>
-      <p>تفاصيل عن آلية العمل...</p>
-    </div>
+  <!-- سكشن آلية العمل -->
+  <section id="process" class="process container">
+    <h2>آلية العمل</h2>
+    <img src="features-image.jpg" alt="آلية العمل">
   </section>
 
-  <!-- تواصل معنا -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <h2>تواصل معنا</h2>
-      <form>
-        <input type="text" placeholder="الاسم" required>
-        <input type="email" placeholder="البريد الإلكتروني" required>
-        <textarea placeholder="رسالتك" required></textarea>
-        <button type="submit">إرسال</button>
-      </form>
-    </div>
+  <!-- سكشن التواصل -->
+  <section id="contact" class="contact container">
+    <h2>تواصل معنا</h2>
+    <p>يمكنك التواصل معنا الآن لنبدأ معك مشروعك.</p>
+    <form action="success.html" method="POST" class="contact-form">
+      <input type="text" name="name" placeholder="اسمك" required>
+      <input type="email" name="email" placeholder="بريدك الإلكتروني" required>
+      <textarea name="message" placeholder="رسالتك" required></textarea>
+      <button type="submit" class="btn btn-primary">إرسال</button>
+    </form>
   </section>
 
-  <!-- فوتر -->
+  <!-- الفوتر -->
   <footer class="footer">
-    <div class="container">
-      <p>© 2025 Education Crafted - جميع الحقوق محفوظة</p>
-    </div>
+    <p>© 2025 Education Crafted. جميع الحقوق محفوظة.</p>
   </footer>
 
-  <!-- الخلفية للقائمة -->
-  <div class="nav-overlay"></div>
-
-  <!-- ملف JavaScript -->
+  <!-- ملف جافاسكربت -->
   <script src="script.js"></script>
 </body>
 </html>
