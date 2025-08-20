@@ -1,57 +1,57 @@
-// Mobile Menu Toggle
-document.addEventListener(\'DOMContentLoaded\', function() {
-    const mobileMenuToggle = document.querySelector(\".mobile-menu-toggle\");
-    const navMenu = document.querySelector(\".nav-menu\");
+document.addEventListener("DOMContentLoaded", function() {
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+    const navMenu = document.querySelector(".nav-menu");
     
     if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener(\'click\', function() {
-            navMenu.classList.toggle(\'active\');
-            this.classList.toggle(\'active\');
+        mobileMenuToggle.addEventListener("click", function() {
+            navMenu.classList.toggle("active");
+            this.classList.toggle("active");
         });
     }
 
     // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll(\".nav-menu a, .footer-links a\");
+    const navLinks = document.querySelectorAll(".nav-menu a, .footer-links a");
     navLinks.forEach(link => {
-        link.addEventListener(\'click\', function(e) {
-            const href = this.getAttribute(\'href\');
-            if (href.startsWith(\'#\')) {
+        link.addEventListener("click", function(e) {
+            const href = this.getAttribute("href");
+            if (href.startsWith("#")) {
                 e.preventDefault();
                 const targetId = href.substring(1);
                 const targetElement = document.getElementById(targetId);
                 if (targetElement) {
-                    const headerHeight = document.querySelector(\".header\").offsetHeight;
+                    const headerHeight = document.querySelector(".header").offsetHeight;
                     const targetPosition = targetElement.offsetTop - headerHeight;
                     window.scrollTo({
                         top: targetPosition,
-                        behavior: \'smooth\'
+                        behavior: "smooth"
                     });
                 }
                 // Close mobile menu if open
-                navMenu.classList.remove(\'active\');
-                mobileMenuToggle.classList.remove(\'active\');
+                navMenu.classList.remove("active");
+                mobileMenuToggle.classList.remove("active");
             }
         });
     });
 
     // Hero buttons functionality
-    const heroButtons = document.querySelectorAll(\".hero-buttons .btn-primary, .hero-buttons .btn-secondary\");
+    const heroButtons = document.querySelectorAll(".hero-buttons .btn-primary, .hero-buttons .btn-secondary");
     heroButtons.forEach(button => {
-        button.addEventListener(\"click\", function() {
+        button.addEventListener("click", function() {
             let targetId;
-            if (this.textContent.includes(\"اكتشف خدماتنا\")) {
-                targetId = \"services\";
-            } else if (this.textContent.includes(\"تواصل معنا\")) {
-                targetId = \"contact\";
+            if (this.textContent.includes("اكتشف خدماتنا")) {
+                targetId = "services";
+            } else if (this.textContent.includes("تواصل معنا")) {
+                targetId = "contact";
             }
             if (targetId) {
                 const targetElement = document.getElementById(targetId);
                 if (targetElement) {
-                    const headerHeight = document.querySelector(\".header\").offsetHeight;
+                    const headerHeight = document.querySelector(".header").offsetHeight;
                     const targetPosition = targetElement.offsetTop - headerHeight;
                     window.scrollTo({
                         top: targetPosition,
-                        behavior: \"smooth\"
+                        behavior: "smooth"
                     });
                 }
             }
@@ -59,87 +59,52 @@ document.addEventListener(\'DOMContentLoaded\', function() {
     });
 
     // CTA buttons functionality
-    const ctaButtons = document.querySelectorAll(\".cta-btn, .solution-text .btn-primary\");
+    const ctaButtons = document.querySelectorAll(".cta-btn, .solution-text .btn-primary");
     ctaButtons.forEach(button => {
-        button.addEventListener(\'click\', function() {
-            document.getElementById(\'contact\').scrollIntoView({ behavior: \'smooth\' });
+        button.addEventListener("click", function() {
+            document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
         });
     });
 
     // Form submission (Netlify Forms will handle this automatically)
-    // const contactForm = document.querySelector(\".contact-form form\");
-    // if (contactForm) {
-    //     contactForm.addEventListener(\'submit\', function(e) {
-    //         e.preventDefault();
-            
-    //         // Get form data
-    //         const formData = new FormData(this);
-    //         const name = formData.get(\'name\');
-    //         const email = formData.get(\'email\');
-    //         const phone = formData.get(\'phone\');
-    //         const message = formData.get(\'message\');
-            
-    //         // Simple validation
-    //         if (!name || !email || !phone || !message) {
-    //             alert(\'يرجى ملء جميع الحقول المطلوبة\');
-    //             return;
-    //         }
-            
-    //         // Email validation
-    //         const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-    //         if (!emailRegex.test(email)) {
-    //             alert(\'يرجى إدخال بريد إلكتروني صحيح\');
-    //             return;
-    //         }
-            
-    //         // Phone validation (Egyptian format)
-    //         const phoneRegex = /^01[0-9]{9}$/;
-    //         if (!phoneRegex.test(phone)) {
-    //             alert(\'يرجى إدخال رقم هاتف صحيح (01XXXXXXXXX)\');
-    //             return;
-    //         }
-            
-    //         // Show success message
-    //         alert(\'تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.\');
-    //         this.reset();
-    //     });
-    // }
+    // The previous form submission code was commented out, which is correct for Netlify Forms.
+    // No changes needed here for form submission logic, as Netlify handles it.
 
     // Scroll animations
     const observerOptions = {
         threshold: 0.1,
-        rootMargin: \'0px 0px -50px 0px\'
+        rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add(\'visible\');
+                entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
 
     // Add fade-in class to elements and observe them
-    const animateElements = document.querySelectorAll(\".stat-card, .service-card, .feature-card, .step, .contact-item\");
+    const animateElements = document.querySelectorAll(".stat-card, .service-card, .feature-card, .step, .contact-item");
     animateElements.forEach(el => {
-        el.classList.add(\'fade-in\');
+        el.classList.add('fade-in');
         observer.observe(el);
     });
 
     // Header scroll effect
-    window.addEventListener(\'scroll\', function() {
-        const header = document.querySelector(\".header\");
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector(".header");
         if (window.scrollY > 100) {
-            header.style.background = \'rgba(255, 255, 255, 0.95)\';
-            header.style.backdropFilter = \'blur(10px)\';
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.backdropFilter = 'blur(10px)';
         } else {
-            header.style.background = \'#fff\';
-            header.style.backdropFilter = \'none\';
+            header.style.background = '#fff';
+            header.style.backdropFilter = 'none';
         }
     });
 
     // Counter animation for statistics
-    const counters = document.querySelectorAll(\".stat-card h3\");
+    const counters = document.querySelectorAll(".stat-card h3");
     const counterObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -153,7 +118,7 @@ document.addEventListener(\'DOMContentLoaded\', function() {
                         current = target;
                         clearInterval(timer);
                     }
-                    counter.textContent = Math.floor(current) + \'%\';
+                    counter.textContent = Math.floor(current) + '%';
                 }, 30);
                 counterObserver.unobserve(counter);
             }
@@ -165,21 +130,21 @@ document.addEventListener(\'DOMContentLoaded\', function() {
     });
 
     // Add hover effects to cards
-    const cards = document.querySelectorAll(\".stat-card, .service-card, .feature-card\");
+    const cards = document.querySelectorAll(".stat-card, .service-card, .feature-card");
     cards.forEach(card => {
-        card.addEventListener(\'mouseenter\', function() {
-            this.style.transform = \'translateY(-10px) scale(1.02)\';
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px) scale(1.02)';
         });
         
-        card.addEventListener(\'mouseleave\', function() {
-            this.style.transform = \'translateY(0) scale(1)\';
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
         });
     });
 
     // Parallax effect for hero section
-    window.addEventListener(\'scroll\', function() {
+    window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
-        const heroImage = document.querySelector(\".hero-image img\");
+        const heroImage = document.querySelector(".hero-image img");
         if (heroImage) {
             heroImage.style.transform = `translateY(${scrolled * 0.2}px)`;
         }
@@ -187,7 +152,7 @@ document.addEventListener(\'DOMContentLoaded\', function() {
 });
 
 // Add CSS for mobile menu
-const style = document.createElement(\'style\');
+const style = document.createElement('style');
 style.textContent = `
     @media (max-width: 768px) {
         .nav-menu.active {
@@ -228,17 +193,17 @@ document.head.appendChild(style);
 
 // Floating WhatsApp Button (Fixed Position)
 function createFloatingWhatsApp() {
-    const floatingBtn = document.createElement(\'div\');
-    floatingBtn.className = \'floating-whatsapp\';
+    const floatingBtn = document.createElement('div');
+    floatingBtn.className = 'floating-whatsapp';
     floatingBtn.innerHTML = `
-        <a href=\"https://wa.me/201097833578?text=مرحباً، أريد الاستفسار عن خدماتكم التعليمية\" target=\"_blank\">
-            <i class=\"fab fa-whatsapp\"></i>
+        <a href="https://wa.me/201097833578?text=مرحباً، أريد الاستفسار عن خدماتكم التعليمية" target="_blank">
+            <i class="fab fa-whatsapp"></i>
         </a>
     `;
-    document.body.appendChild(floatingBtn);
+    document.body.appendChild(floatingBtn );
     
     // Add CSS for floating button
-    const floatingStyle = document.createElement(\'style\');
+    const floatingStyle = document.createElement('style');
     floatingStyle.textContent = `
         .floating-whatsapp {
             position: fixed;
@@ -292,7 +257,7 @@ function createFloatingWhatsApp() {
 // Typing Animation for Hero Title
 function typeWriter(element, text, speed = 100) {
     let i = 0;
-    element.innerHTML = \'\';
+    element.innerHTML = '';
     
     function type() {
         if (i < text.length) {
@@ -306,7 +271,7 @@ function typeWriter(element, text, speed = 100) {
 
 // Smooth Reveal Animation on Scroll
 function revealOnScroll() {
-    const reveals = document.querySelectorAll(\".reveal\");
+    const reveals = document.querySelectorAll(".reveal");
     
     reveals.forEach(reveal => {
         const windowHeight = window.innerHeight;
@@ -314,28 +279,28 @@ function revealOnScroll() {
         const elementVisible = 150;
         
         if (elementTop < windowHeight - elementVisible) {
-            reveal.classList.add(\'active\');
+            reveal.classList.add('active');
         }
     });
 }
 
 // Progress Bar Animation
 function animateProgressBars() {
-    const progressBars = document.querySelectorAll(\".progress-bar\");
+    const progressBars = document.querySelectorAll(".progress-bar");
     
     progressBars.forEach(bar => {
-        const progress = bar.getAttribute(\'data-progress\');
-        bar.style.width = progress + \'%\';
+        const progress = bar.getAttribute('data-progress');
+        bar.style.width = progress + '%';
     });
 }
 
 // Interactive Cursor Effect
 function createCursorEffect() {
-    const cursor = document.createElement(\'div\');
-    cursor.className = \'custom-cursor\';
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
     document.body.appendChild(cursor);
     
-    const cursorStyle = document.createElement(\'style\');
+    const cursorStyle = document.createElement('style');
     cursorStyle.textContent = `
         .custom-cursor {
             position: fixed;
@@ -363,26 +328,26 @@ function createCursorEffect() {
     `;
     document.head.appendChild(cursorStyle);
     
-    document.addEventListener(\'mousemove\', (e) => {
-        cursor.style.left = e.clientX + \'px\';
-        cursor.style.top = e.clientY + \'px\';
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
     });
     
     // Add hover effect to interactive elements
-    const interactiveElements = document.querySelectorAll(\'a, button, .card\');
+    const interactiveElements = document.querySelectorAll('a, button, .card');
     interactiveElements.forEach(el => {
-        el.addEventListener(\'mouseenter\', () => cursor.classList.add(\'hover\'));
-        el.addEventListener(\'mouseleave\', () => cursor.classList.remove(\'hover\'));
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
     });
 }
 
 // Particle Background Effect
 function createParticles() {
-    const particlesContainer = document.createElement(\'div\');
-    particlesContainer.className = \'particles-container\';
-    document.querySelector(\".hero\").appendChild(particlesContainer);
+    const particlesContainer = document.createElement('div');
+    particlesContainer.className = 'particles-container';
+    document.querySelector(".hero").appendChild(particlesContainer);
     
-    const particleStyle = document.createElement(\'style\');
+    const particleStyle = document.createElement('style');
     particleStyle.textContent = `
         .particles-container {
             position: absolute;
@@ -422,11 +387,11 @@ function createParticles() {
     
     // Create particles
     setInterval(() => {
-        const particle = document.createElement(\'div\');
-        particle.className = \'particle\';
-        particle.style.left = Math.random() * 100 + \'%\';
-        particle.style.width = particle.style.height = Math.random() * 10 + 5 + \'px\';
-        particle.style.animationDuration = Math.random() * 3 + 3 + \'s\';
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.width = particle.style.height = Math.random() * 10 + 5 + 'px';
+        particle.style.animationDuration = Math.random() * 3 + 3 + 's';
         particlesContainer.appendChild(particle);
         
         setTimeout(() => {
@@ -437,13 +402,13 @@ function createParticles() {
 
 // Text Highlight Animation
 function highlightText() {
-    const highlights = document.querySelectorAll(\".highlight\");
+    const highlights = document.querySelectorAll(".highlight");
     highlights.forEach(highlight => {
         const text = highlight.textContent;
-        highlight.innerHTML = `<span class=\"highlight-text\">${text}</span>`;
+        highlight.innerHTML = `<span class="highlight-text">${text}</span>`;
     });
     
-    const highlightStyle = document.createElement(\'style\');
+    const highlightStyle = document.createElement('style');
     highlightStyle.textContent = `
         .highlight-text {
             background: linear-gradient(120deg, transparent 0%, transparent 50%, #2563EB 50%);
@@ -464,7 +429,7 @@ function highlightText() {
 }
 
 // Initialize all enhanced features
-document.addEventListener(\'DOMContentLoaded\', function() {
+document.addEventListener('DOMContentLoaded', function() {
     // Create floating WhatsApp button
     createFloatingWhatsApp();
     
@@ -483,97 +448,81 @@ document.addEventListener(\'DOMContentLoaded\', function() {
     const highlightObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.querySelector(\".highlight-text\").classList.add(\'animate\');
+                entry.target.querySelector(".highlight-text").classList.add('animate');
             }
         });
     }, { threshold: 0.5 });
     
-    document.querySelectorAll(\".highlight\").forEach(el => {
+    document.querySelectorAll(".highlight").forEach(el => {
         highlightObserver.observe(el);
     });
     
     // Add scroll reveal animation
-    window.addEventListener(\'scroll\', revealOnScroll);
+    window.addEventListener('scroll', revealOnScroll);
     
-    // Add typing effect to hero title (delayed)
-    setTimeout(() => {
-        const heroTitle = document.querySelector(\".hero h1\");
-        if (heroTitle) {
-            const originalText = heroTitle.textContent;
-            heroTitle.textContent = \'\'; // Clear text initially
-            typeWriter(heroTitle, originalText, 70);
-        }
-    }, 500);
-});
-
-// Add fade-in class to elements and observe them
-const animateElements = document.querySelectorAll(\".stat-card, .service-card, .feature-card, .step, .contact-item\");
-animateElements.forEach(el => {
-    el.classList.add(\'fade-in\');
-    observer.observe(el);
-});
-
-// Header scroll effect
-window.addEventListener(\'scroll\', function() {
-    const header = document.querySelector(\".header\");
-    if (window.scrollY > 100) {
-        header.style.background = \'rgba(255, 255, 255, 0.95)\';
-        header.style.backdropFilter = \'blur(10px)\';
-    } else {
-        header.style.background = \'#fff\';
-        header.style.backdropFilter = \'none\';
+    // Add typing effect to hero title
+    const heroTitle = document.querySelector('.hero-content h1');
+    if (heroTitle) {
+        const originalText = heroTitle.textContent;
+        heroTitle.textContent = ''; // Clear text before typing
+        typeWriter(heroTitle, originalText, 70);
     }
-});
 
-// Counter animation for statistics
-const counters = document.querySelectorAll(\".stat-card h3\");
-const counterObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const counter = entry.target;
-            const target = parseInt(counter.textContent);
-            let current = 0;
-            const increment = target / 50;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                counter.textContent = Math.floor(current) + \'%\';
-            }, 30);
-            counterObserver.unobserve(counter);
+    // Animate progress bars on scroll
+    const progressBars = document.querySelectorAll('.progress-bar');
+    const progressBarObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateProgressBars();
+                progressBarObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    progressBars.forEach(bar => {
+        progressBarObserver.observe(bar);
+    });
+
+    // Ripple effect for buttons
+    const buttons = document.querySelectorAll('button, .btn');
+    buttons.forEach(button => {
+        button.style.position = 'relative';
+        button.style.overflow = 'hidden';
+
+        button.addEventListener('click', function(e) {
+            const x = e.clientX - e.target.offsetLeft;
+            const y = e.clientY - e.target.offsetTop;
+
+            const ripple = document.createElement('span');
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            this.appendChild(ripple);
+
+            ripple.classList.add('ripple');
+
+            ripple.addEventListener('animationend', function() {
+                ripple.remove();
+            });
+        });
+    });
+
+    // Add CSS for ripple effect
+    const rippleStyle = document.createElement('style');
+    rippleStyle.textContent = `
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            background-color: rgba(255, 255, 255, 0.7);
         }
-    });
-}, { threshold: 0.5 });
 
-counters.forEach(counter => {
-    counterObserver.observe(counter);
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(rippleStyle);
 });
-
-// Add hover effects to cards
-const cards = document.querySelectorAll(\".stat-card, .service-card, .feature-card\");
-cards.forEach(card => {
-    card.addEventListener(\'mouseenter\', function() {
-        this.style.transform = \'translateY(-10px) scale(1.02)\';
-    });
-    
-    card.addEventListener(\'mouseleave\', function() {
-        this.style.transform = \'translateY(0) scale(1)\';
-    });
-});
-
-// Parallax effect for hero section
-window.addEventListener(\'scroll\', function() {
-    const scrolled = window.pageYOffset;
-    const heroImage = document.querySelector(\".hero-image img\");
-    if (heroImage) {
-        heroImage.style.transform = `translateY(${scrolled * 0.2}px)`;
-    }
-});
-
-// Initial calls for animations
-revealOnScroll();
-animateProgressBars();
-
-
