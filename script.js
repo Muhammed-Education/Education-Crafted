@@ -1,120 +1,95 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // عناصر أساسية
-  const header       = document.querySelector('.header');
-  const navMenu      = document.querySelector('.nav-menu');
-  const mobileToggle = document.querySelector('.mobile-menu-toggle');
+// script.js
+document.addEventListener("DOMContentLoaded", () => {
+  const header       = document.querySelector(".header");
+  const navMenu      = document.querySelector(".nav-menu");
+  const mobileToggle = document.querySelector(".mobile-menu-toggle");
+  const overlay      = document.querySelector(".nav-overlay");
 
-  // ===== 1) دالة سكرول سلس مع خصم ارتفاع الهيدر =====
+  // سكرول سلس مع خصم ارتفاع الهيدر
   function smoothScrollTo(selector) {
     const target = document.querySelector(selector);
     if (!target) return;
-
     const headerH = header ? header.offsetHeight : 0;
-    const top = target.getBoundingClientRect().top + window.pageYOffset - headerH;
+    const y = target.getBoundingClientRect().top + window.pageYOffset - headerH;
+    window.scrollTo({ top: y, behavior: "smooth" });
 
-    window.scrollTo({ top, behavior: 'smooth' });
+    if (selector === "#contact") {
+      setTimeout(() => {
+        const firstInput = document.querySelector("#contact input, #contact textarea");
+        firstInput && firstInput.focus();
+      }, 500);
+    }
   }
 
-  // ===== 2) روابط داخلية href="#..." =====
+  // فتح/إغلاق القائمة
+  function openMenu() {
+    navMenu?.classList.add("active");
+    mobileToggle?.classList.add("active");
+    overlay?.classList.add("active");
+    document.body.classList.add("lock-scroll");
+    mobileToggle?.setAttribute("aria-expanded", "true");
+    navMenu?.setAttribute("aria-hidden", "false");
+  }
+  function closeMenu() {
+    navMenu?.classList.remove("active");
+    mobileToggle?.classList.remove("active");
+    overlay?.classList.remove("active");
+    document.body.classList.remove("lock-scroll");
+    mobileToggle?.setAttribute("aria-expanded", "false");
+    navMenu?.setAttribute("aria-hidden", "true");
+  }
+
+  mobileToggle?.addEventListener("click", () => {
+    if (navMenu?.classList.contains("active")) closeMenu();
+    else openMenu();
+  });
+  overlay?.addEventListener("click", closeMenu);
+
+  // روابط داخلية
   document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', e => {
-      const hash = link.getAttribute('href');
+    link.addEventListener("click", e => {
+      const hash = link.getAttribute("href");
       if (hash && hash.length > 1) {
         e.preventDefault();
         smoothScrollTo(hash);
-        navMenu?.classList.remove('active');
-        mobileToggle?.classList.remove('active');
+        closeMenu();
       }
     });
   });
 
-  // ===== 3) أزرار بـ data-scroll="#sectionId" =====
-  document.querySelectorAll('[data-scroll]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const sel = btn.getAttribute('data-scroll');
+  // الأزرار بـ data-scroll
+  document.querySelectorAll("[data-scroll]").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.preventDefault();
+      const sel = btn.getAttribute("data-scroll");
       if (sel) smoothScrollTo(sel);
-      navMenu?.classList.remove('active');
-      mobileToggle?.classList.remove('active');
+      closeMenu();
     });
   });
 
-  // ===== 4) فتح/إغلاق منيو الموبايل =====
-  mobileToggle?.addEventListener('click', () => {
-    navMenu?.classList.toggle('active');
-    mobileToggle.classList.toggle('active');
-  });
-
-  // ===== 5) تأثير على الهيدر أثناء السحب =====
-  window.addEventListener('scroll', () => {
+  // شكل الهيدر مع السحب (اختياري)
+  window.addEventListener("scroll", () => {
     if (!header) return;
     if (window.scrollY > 100) {
-      header.style.background = 'rgba(255,255,255,0.95)';
-      header.style.backdropFilter = 'blur(10px)';
-      header.style.boxShadow = '0 6px 18px rgba(0,0,0,0.08)';
+      header.style.background = "rgba(255,255,255,0.95)";
+      header.style.backdropFilter = "blur(10px)";
+      header.style.boxShadow = "0 6px 18px rgba(0,0,0,0.08)";
     } else {
-      header.style.background = '#fff';
-      header.style.backdropFilter = 'none';
-      header.style.boxShadow = 'none';
+      header.style.background = "#fff";
+      header.style.backdropFilter = "none";
+      header.style.boxShadow = "none";
     }
   });
 
-  // ===== 6) أنيميشن ظهور العناصر (اختياري) =====
-  // أضف كلاس fade-in لأي عنصر تحب يظهر تدريجيًا.
+  // أنيميشن ظهور العناصر (اختياري)
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible'); // فعّل الأنيميشن
+        entry.target.classList.add("visible");
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
 
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  // ===== 7) إرسال نموذج Netlify ثم التحويل لصفحة النجاح =====
-  // يعمل حتى لو شيلت action من الفورم.
-  const form = document.querySelector("form[name='contact']");
-  if (form) {
-    // تأكيد وجود الحقل المخفي (لو اتشال بالغلط)
-    if (!form.querySelector("input[name='form-name']")) {
-      const hidden = document.createElement('input');
-      hidden.type = 'hidden';
-      hidden.name = 'form-name';
-      hidden.value = 'contact';
-      form.prepend(hidden);
-    }
-
-    // دالة ترميز x-www-form-urlencoded
-    const encode = (dataObj) =>
-      Object.keys(dataObj)
-        .map(k => encodeURIComponent(k) + "=" + encodeURIComponent(dataObj[k]))
-        .join("&");
-
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-
-      // جمع البيانات يدويًا لضمان الصيغة الصحيحة
-      const data = {
-        'form-name': 'contact',
-        name:    form.querySelector('[name="name"]')?.value || '',
-        email:   form.querySelector('[name="email"]')?.value || '',
-        phone:   form.querySelector('[name="phone"]')?.value || '',
-        message: form.querySelector('[name="message"]')?.value || ''
-      };
-
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode(data)
-      })
-      .then(res => {
-        if (!res.ok) throw new Error('Submit failed');
-        // تحويل لصفحة النجاح (تأكد success.html موجودة بجوار index.html)
-        window.location.href = '/success.html';
-      })
-      .catch(() => {
-        alert('⚠️ حصل خطأ أثناء الإرسال. حاول تاني.');
-      });
-    });
-  }
+  document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 });
