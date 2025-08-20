@@ -114,7 +114,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="25" cy="25" r="10" fill="rgba(255,255,255,0.1 )"><animate attributeName="cx" from="0" to="100" dur="10s" repeatCount="indefinite" /><animate attributeName="cy" from="0" to="100" dur="12s" repeatCount="indefinite" /></circle><circle cx="75" cy="75" r="15" fill="rgba(255,255,255,0.1)"><animate attributeName="cx" from="100" to="0" dur="11s" repeatCount="indefinite" /><animate attributeName="cy" from="100" to="0" dur="13s" repeatCount="indefinite" /></circle><circle cx="50" cy="50" r="8" fill="rgba(255,255,255,0.1)"><animate attributeName="cx" from="50" to="70" dur="8s" repeatCount="indefinite" /><animate attributeName="cy" from="50" to="30" dur="9s" repeatCount="indefinite" /></circle></svg>');
+    background: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="25" cy="25" r="10" fill="rgba(255,255,255,0.1)"><animate attributeName="cx" from="0" to="100" dur="10s" repeatCount="indefinite" /><animate attributeName="cy" from="0" to="100" dur="12s" repeatCount="indefinite" /></circle><circle cx="75" cy="75" r="15" fill="rgba(255,255,255,0.1)"><animate attributeName="cx" from="100" to="0" dur="11s" repeatCount="indefinite" /><animate attributeName="cy" from="100" to="0" dur="13s" repeatCount="indefinite" /></circle><circle cx="50" cy="50" r="8" fill="rgba(255,255,255,0.1)"><animate attributeName="cx" from="50" to="70" dur="8s" repeatCount="indefinite" /><animate attributeName="cy" from="50" to="30" dur="9s" repeatCount="indefinite" /></circle></svg>');
     background-size: cover;
     opacity: 0.5;
     z-index: 0;
@@ -582,9 +582,10 @@ body {
 
 .contact-content {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr 1fr; /* Changed from 1fr to 2fr 1fr */
     gap: 4rem;
     margin-top: 3rem;
+    /* Removed justify-content: center; */
 }
 
 .contact-form {
@@ -627,7 +628,8 @@ body {
 .contact-info {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Reduced gap for better spacing */
+    gap: 1.5rem;
+    /* Removed max-width and margin auto */
 }
 
 .contact-item {
@@ -669,17 +671,6 @@ body {
 .contact-item:hover i {
     background: #2563EB;
     color: white;
-}
-
-.contact-item h4 {
-    font-size: 1.2rem;
-    color: #333;
-    margin-bottom: 0.2rem;
-}
-
-.contact-item p {
-    font-size: 1rem;
-    color: #666;
 }
 
 /* Specific icon colors */
@@ -849,11 +840,6 @@ body {
         display: flex;
     }
 
-    .nav-menu li {
-        text-align: center;
-        margin: 0.5rem 0;
-    }
-
     .cta-btn {
         display: none;
     }
@@ -1006,8 +992,8 @@ body {
         background-color: rgba(37, 99, 235, 0.5); /* Blue with transparency */
         pointer-events: none;
         transform: translate(-50%, -50%);
-        transition: width 0.2s, height 0.2s, background-color 0.2s;
         z-index: 9999;
+        transition: width 0.2s, height 0.2s, background-color 0.2s;
     }
 
     .custom-cursor.hover {
@@ -1016,3 +1002,4 @@ body {
         background-color: rgba(245, 158, 11, 0.7); /* Orange with transparency */
     }
 }
+

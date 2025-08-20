@@ -118,7 +118,7 @@
                     </div>
                     <h3>إنشاء المحتوى الإلكتروني</h3>
                     <ul>
-                        <li>تطوير الدورات التفاعلية (E-learning )</li>
+                        <li>تطوير الدورات التفاعلية (E-learning)</li>
                         <li>إنتاج الفيديوهات التعليمية</li>
                         <li>إنشاء المحتوى التفاعلي (اختبارات - ألعاب - محاكاة)</li>
                         <li>إدارة منصات التعلم (LMS)</li>
@@ -178,13 +178,6 @@
                     </div>
                 </div>
                 <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>تصميم الحل</h3>
-                        <p>نضع خطة تدريبية أو تعليمية مخصصة، مع تحديد أسلوب التنفيذ المناسب (حضوري، إلكتروني، أو مدمج)</p>
-                    </div>
-                </div>
-                <div class="step">
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <h3>التنفيذ والإنتاج</h3>
@@ -209,7 +202,7 @@
             <p class="section-subtitle">ابدأ مشروعك التعليمي معنا اليوم</p>
             <div class="contact-content">
                 <div class="contact-form">
-                    <form>
+                    <form name="contact" method="POST" data-netlify="true">
                         <div class="form-group">
                             <label for="name">الاسم الكامل</label>
                             <input type="text" id="name" name="name" required>
@@ -219,8 +212,8 @@
                             <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">رقم الهاتف</label>
-                            <input type="tel" id="phone" name="phone" required>
+                            <label for="phone">رقم الهاتف (اختياري)</label>
+                            <input type="tel" id="phone" name="phone">
                         </div>
                         <div class="form-group">
                             <label for="message">رسالتك</label>
@@ -293,3 +286,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+
