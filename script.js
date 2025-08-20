@@ -200,7 +200,7 @@ function createFloatingWhatsApp() {
             <i class="fab fa-whatsapp"></i>
         </a>
     `;
-    document.body.appendChild(floatingBtn );
+    document.body.appendChild(floatingBtn);
     
     // Add CSS for floating button
     const floatingStyle = document.createElement('style');
@@ -526,3 +526,5 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(rippleStyle);
 });
+
+
