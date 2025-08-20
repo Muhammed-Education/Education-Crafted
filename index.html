@@ -1,215 +1,103 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Education Crafted - شريكك في تصميم محتوى تعليمي يحقق الأثر</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link rel="stylesheet" href="styles.css"/>
+  <!-- العنوان اللي بيظهر في التبويب -->
+  <title>Education Crafted - شريكك في التميز التعليمي</title>
+
+  <!-- الأيقونة (favicon) -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- خطوط جوجل -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- أيقونات Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- ملف التنسيقات -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- ملف JavaScript -->
+  <script defer src="script.js"></script>
 </head>
 <body>
-
-  <!-- الهيدر -->
+  <!-- رأس الموقع -->
   <header class="header">
-    <nav class="nav" role="navigation" aria-label="القائمة الرئيسية">
-      <div class="nav-brand">
-        <strong style="font-size:20px">Education Crafted</strong>
-        <div class="tagline" style="font-size:12px;opacity:.7">شريكك في التميز التعليمي</div>
-      </div>
-
-      <ul class="nav-menu" id="mainMenu" aria-hidden="true">
-        <li><a href="#home">الرئيسية</a></li>
+    <div class="logo">Education Crafted</div>
+    <nav class="navbar" id="navbar">
+      <ul>
+        <li><a href="#hero">الرئيسية</a></li>
         <li><a href="#services">خدماتنا</a></li>
-        <li><a href="#features">لماذا نحن</a></li>
+        <li><a href="#about">من نحن</a></li>
         <li><a href="#process">آلية العمل</a></li>
         <li><a href="#contact">تواصل معنا</a></li>
       </ul>
-
-      <button class="cta-btn" data-scroll="#contact">ابدأ مشروعك</button>
-
-      <!-- زر منيو الموبايل -->
-      <button class="mobile-menu-toggle" aria-controls="mainMenu" aria-expanded="false" aria-label="فتح القائمة">
-        <span></span><span></span><span></span>
-      </button>
     </nav>
-
-    <!-- الخلفية المعتمة للقائمة -->
-    <div class="nav-overlay" aria-hidden="true"></div>
+    <div class="menu-toggle" id="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
   </header>
 
-  <!-- البطل -->
-  <section id="home" class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1>شريكك في تصميم محتوى تعليمي رقمي <span class="highlight" style="color:#fbbf24">يحقق الأثر</span></h1>
-          <p>نقدّم حلولًا متكاملة لتطوير المحتوى التعليمي والإلكتروني للشركات والمدربين؛ من التحليل والتصميم إلى الإنتاج وقياس الأثر.</p>
-          <div class="hero-buttons">
-            <button class="btn-primary"  data-scroll="#services">اكتشف خدماتنا</button>
-            <button class="btn-secondary" data-scroll="#contact">تواصل معنا</button>
-          </div>
-        </div>
-        <div class="hero-image">
-          <img src="hero-image.jpg" alt="التعلم الرقمي والمحتوى التعليمي" style="width:100%;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.25)"/>
-        </div>
+  <!-- القسم الرئيسي -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <h1>شريكك في تصميم محتوى تعليمي رقمي <span>يحقق الأثر</span></h1>
+      <p>نقدّم حلولاً متكاملة لتطوير المحتوى التعليمي والإلكتروني للشركات والمدربين، من التحليل والتصميم إلى الإنتاج وقياس الأثر.</p>
+      <div class="hero-buttons">
+        <a href="#services" class="btn btn-primary">اكتشف خدماتنا</a>
+        <a href="#contact" class="btn btn-secondary">تواصل معنا</a>
+        <a href="#project" class="btn btn-warning">ابدأ مشروعك</a>
       </div>
     </div>
-  </section>
-
-  <!-- قسم المشكلة -->
-  <section class="problem-section">
-    <div class="container">
-      <h2>لماذا تحتاج إلى محتوى تعليمي متخصص؟</h2>
-      <p class="section-subtitle">نحن نفهم التحديات التي تواجهها في إنشاء محتوى فعّال ومؤثر.</p>
-      <div class="stats-grid">
-        <div class="stat-card fade-in"><h3>70%</h3><p>من المؤسسات تفتقر لخبرة التصميم التعليمي.</p></div>
-        <div class="stat-card fade-in"><h3>65%</h3><p>من المتعلمين لا يكملون الدورات غير التفاعلية.</p></div>
-        <div class="stat-card fade-in"><h3>80%</h3><p>من الشركات تحتاج إلى قياس أثر التدريب.</p></div>
-        <div class="stat-card fade-in"><h3>90%</h3><p>من المحتوى التقليدي لا يحقق الأهداف المطلوبة.</p></div>
-      </div>
-      <div class="solution-text" style="margin-top:18px">
-        <p>نصمم لك حلولًا تعليمية قابلة للتطبيق تركّز على أهداف المتعلم والنتائج المتوقعة في عملك.</p>
-        <button class="btn-primary" data-scroll="#contact">ابدأ معنا اليوم</button>
-      </div>
+    <div class="hero-image">
+      <img src="hero-image.jpg" alt="تصميم تعليمي">
     </div>
   </section>
 
   <!-- خدماتنا -->
-  <section id="services" class="services">
-    <div class="container">
-      <h2>خدماتنا</h2>
-      <p class="section-subtitle">حلول شاملة من التحليل والتصميم وحتى الإنتاج وقياس الأثر.</p>
-      <div class="services-grid">
-        <div class="service-card fade-in">
-          <div class="service-icon"><i class="fas fa-pen-fancy"></i></div>
-          <h3>كتابة المحتوى التعليمي</h3>
-          <ul>
-            <li>تصميم المناهج والرحلات التعليمية</li>
-            <li>إعداد الحقائب التدريبية</li>
-            <li>مقالات وأبحاث تعليمية</li>
-            <li>كتب إلكترونية تفاعلية</li>
-          </ul>
-        </div>
-        <div class="service-card fade-in">
-          <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
-          <h3>المحتوى الإلكتروني</h3>
-          <ul>
-            <li>دورات تفاعلية (E-learning)</li>
-            <li>فيديوهات تعليمية</li>
-            <li>اختبارات وألعاب ومحاكاة</li>
-            <li>إدارة منصات التعلم (LMS)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+  <section id="services" class="section">
+    <h2>خدماتنا</h2>
+    <p>نوفر مجموعة شاملة من الخدمات التعليمية.</p>
+    <img src="services-image.jpg" alt="خدماتنا">
   </section>
 
-  <!-- لماذا نحن -->
-  <section id="features" class="features">
-    <div class="container">
-      <h2>لماذا Education Crafted؟</h2>
-      <div class="features-grid">
-        <div class="feature-card fade-in"><i class="fas fa-users-cog feature-icon"></i><h3>فريق متخصص</h3><p>خبرة عملية في التصميم والتكنولوجيا التعليمية.</p></div>
-        <div class="feature-card fade-in"><i class="fas fa-bullseye feature-icon"></i><h3>تركيز على الأثر</h3><p>أهداف واضحة ومؤشرات قياس دقيقة.</p></div>
-        <div class="feature-card fade-in"><i class="fas fa-handshake feature-icon"></i><h3>شراكة طويلة المدى</h3><p>دعم مستمر وتطوير متتابع.</p></div>
-        <div class="feature-card fade-in"><i class="fas fa-chart-bar feature-icon"></i><h3>تحليل وقياس</h3><p>تحسينات مستندة إلى بيانات.</p></div>
-      </div>
-    </div>
+  <!-- من نحن -->
+  <section id="about" class="section">
+    <h2>من نحن</h2>
+    <p>نحن فريق متخصص في تصميم المحتوى التعليمي الرقمي.</p>
+    <img src="about-image.jpg" alt="من نحن">
   </section>
 
   <!-- آلية العمل -->
-  <section id="process" class="process">
-    <div class="container">
-      <h2>آلية العمل</h2>
-      <div class="process-steps">
-        <div class="step fade-in"><div class="step-number">1</div><h3>تحليل الاحتياج</h3><p>فهم الفجوات والأهداف.</p></div>
-        <div class="step fade-in"><div class="step-number">2</div><h3>التصميم</h3><p>تحويل التحليل إلى حلول تعليمية قابلة للتنفيذ.</p></div>
-        <div class="step fade-in"><div class="step-number">3</div><h3>التطوير والإنتاج</h3><p>تنفيذ المحتوى بأدوات حديثة.</p></div>
-        <div class="step fade-in"><div class="step-number">4</div><h3>القياس والتحسين</h3><p>متابعة الأداء وتطوير مستمر.</p></div>
-      </div>
-    </div>
+  <section id="process" class="section">
+    <h2>آلية العمل</h2>
+    <p>نتبع خطوات مدروسة لضمان نجاح مشروعك.</p>
+    <img src="features-image.jpg" alt="آلية العمل">
   </section>
 
-  <!-- تواصل معنا (Netlify Forms) -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <h2>تواصل معنا</h2>
-      <p class="section-subtitle">ابدأ مشروعك التعليمي الآن.</p>
-      <div class="contact-content">
-        <div class="contact-form">
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="success.html">
-            <input type="hidden" name="form-name" value="contact" />
-            <input type="hidden" name="bot-field" />
-            <div class="form-group">
-              <label for="name">الاسم الكامل</label>
-              <input id="name" name="name" type="text" required />
-            </div>
-            <div class="form-group">
-              <label for="email">البريد الإلكتروني</label>
-              <input id="email" name="email" type="email" required />
-            </div>
-            <div class="form-group">
-              <label for="phone">رقم الهاتف (اختياري)</label>
-              <input id="phone" name="phone" type="tel" />
-            </div>
-            <div class="form-group">
-              <label for="message">رسالتك</label>
-              <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="btn-primary">إرسال الرسالة</button>
-          </form>
-        </div>
+  <!-- ابدأ مشروعك -->
+  <section id="project" class="section">
+    <h2>ابدأ مشروعك اليوم</h2>
+    <p>ابدأ معنا رحلتك لبناء محتوى تدريبي وتعليمي فعال.</p>
+    <a href="#contact" class="btn btn-primary">ابدأ الآن</a>
+  </section>
 
-        <div class="contact-info">
-          <div class="contact-item fade-in">
-            <a href="mailto:mu.3coo@gmail.com" style="text-decoration:none;color:inherit">
-              <i class="fas fa-envelope"></i>
-              <div><h4>البريد</h4><p>mu.3coo@gmail.com</p></div>
-            </a>
-          </div>
-          <div class="contact-item fade-in">
-            <a href="https://wa.me/201097833578?text=مرحباً، أريد الاستفسار عن خدماتكم" target="_blank" style="text-decoration:none;color:inherit">
-              <i class="fab fa-whatsapp"></i>
-              <div><h4>واتساب</h4><p>+201097833578</p></div>
-            </a>
-          </div>
-          <div class="contact-item fade-in">
-            <i class="fas fa-clock"></i>
-            <div><h4>ساعات العمل</h4><p>الأحد - الخميس: 9:00 ص - 6:00 م</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- تواصل معنا -->
+  <section id="contact" class="section">
+    <h2>تواصل معنا</h2>
+    <form action="success.html" method="POST">
+      <input type="text" name="name" placeholder="اسمك" required>
+      <input type="email" name="email" placeholder="بريدك الإلكتروني" required>
+      <textarea name="message" placeholder="رسالتك" required></textarea>
+      <button type="submit" class="btn btn-primary">إرسال</button>
+    </form>
   </section>
 
   <!-- الفوتر -->
   <footer class="footer">
-    <div class="container" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px">
-      <div>
-        <h3>Education Crafted</h3>
-        <p>شريكك في تصميم محتوى تعليمي رقمي يحقق الأثر.</p>
-      </div>
-      <div>
-        <h4>روابط سريعة</h4>
-        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:6px">
-          <li><a href="#home">الرئيسية</a></li>
-          <li><a href="#services">خدماتنا</a></li>
-          <li><a href="#features">لماذا نحن</a></li>
-          <li><a href="#process">آلية العمل</a></li>
-          <li><a href="#contact">تواصل معنا</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>تواصل</h4>
-        <p><i class="fas fa-envelope"></i> mu.3coo@gmail.com</p>
-        <p><i class="fas fa-phone"></i> 01097833578</p>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:12px;color:#cbd5e1">© 2025 جميع الحقوق محفوظة</div>
+    <p>© 2025 Education Crafted. جميع الحقوق محفوظة.</p>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
