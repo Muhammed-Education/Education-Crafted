@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عالَم تعلم الكبار</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #111118;
+  --bg3: #17171f;
+  --gold: #e8a020;
+  --gold2: #f5c842;
+  --gold-dim: rgba(232,160,32,0.12);
+  --teal: #2dd4bf;
+  --teal-dim: rgba(45,212,191,0.1);
+  --rose: #fb7185;
+  --rose-dim: rgba(251,113,133,0.1);
+  --violet: #a78bfa;
+  --violet-dim: rgba(167,139,250,0.1);
+  --text: #f0ede8;
+  --text2: #9e9b94;
+  --text3: #5c5a55;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --r: 12px;
+  --rl: 20px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  direction: rtl;
+}
+
+/* ─── NOISE TEXTURE ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 48px;
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-size: 18px; font-weight: 700; color: var(--gold);
+  letter-spacing: -0.5px;
+}
+
+.nav-links { display: flex; gap: 8px; }
+.nav-links a {
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 13px; color: var(--text2);
+  text-decoration: none;
+  transition: all .2s;
+  border: 1px solid transparent;
+}
+.nav-links a:hover {
+  color: var(--text); background: var(--bg3);
+  border-color: var(--border2);
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 120px 48px 80px;
+  position: relative; text-align: center;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,160,32,0.15) 0%, transparent 70%);
+  top: 50%; left: 50%; transform: translate(-50%, -55%);
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%);
+}
+
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 16px; border-radius: 20px;
+  border: 1px solid rgba(232,160,32,0.3);
+  background: rgba(232,160,32,0.08);
+  font-size: 12px; color: var(--gold);
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.badge::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+.hero h1 {
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 50%, #f97316 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 18px; color: var(--text2);
+  max-width: 540px; line-height: 1.8;
+  margin-bottom: 40px;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.hero-btns {
+  display: flex; gap: 12px; justify-content: center;
+  animation: fadeUp 0.7s 0.3s ease both;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  padding: 14px 32px; border-radius: 50px;
+  background: var(--gold); color: #0a0a0f;
+  font-family: 'Cairo', sans-serif;
+  font-size: 15px; font-weight: 700;
+  border: none; cursor: pointer;
+  transition: all .2s;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(232,160,32,0.4);
+}
+
+.btn-outline {
+  padding: 14px 32px; border-radius: 50px;
+  background: transparent; color: var(--text);
+  font-family: 'Cairo', sans-serif;
+  font-size: 15px; font-weight: 600;
+  border: 1px solid var(--border2); cursor: pointer;
+  transition: all .2s;
+  text-decoration: none;
+}
+.btn-outline:hover { background: var(--bg3); }
+
+.stats-row {
+  display: flex; gap: 40px; justify-content: center;
+  margin-top: 60px; padding-top: 40px;
+  border-top: 1px solid var(--border);
+  animation: fadeUp 0.7s 0.4s ease both;
+  flex-wrap: wrap; gap: 30px;
+}
+
+.stat { text-align: center; }
+.stat .num { font-size: 28px; font-weight: 800; color: var(--gold); line-height: 1; }
+.stat .lbl { font-size: 12px; color: var(--text3); margin-top: 4px; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── SECTIONS ─── */
+section {
+  padding: 100px 48px;
+  max-width: 1200px; margin: 0 auto;
+  position: relative; z-index: 1;
+}
+
+.section-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 12px;
+}
+.section-tag::before {
+  content: ''; width: 20px; height: 1px; background: var(--gold);
+}
+
+.section-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900; letter-spacing: -1px;
+  line-height: 1.2; margin-bottom: 16px;
+}
+
+.section-sub {
+  font-size: 16px; color: var(--text2); line-height: 1.8;
+  max-width: 560px; margin-bottom: 56px;
+}
+
+/* ─── THEORY CARDS ─── */
+.theories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.theory-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  padding: 28px;
+  cursor: pointer;
+  transition: all .3s;
+  position: relative; overflow: hidden;
+}
+
+.theory-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-color, var(--gold)), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+
+.theory-card:hover {
+  border-color: var(--border2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+.theory-card:hover::before { opacity: 1; }
+
+.theory-num {
+  font-size: 11px; color: var(--text3);
+  font-weight: 600; letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.theory-icon {
+  font-size: 32px; margin-bottom: 14px;
+  display: block;
+}
+
+.theory-card h3 {
+  font-size: 18px; font-weight: 700;
+  margin-bottom: 10px; line-height: 1.3;
+}
+
+.theory-card p {
+  font-size: 14px; color: var(--text2);
+  line-height: 1.7;
+}
+
+/* ─── ANDRAGOGY SECTION ─── */
+.andro-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px; align-items: start;
+}
+
+.andro-info { position: sticky; top: 100px; }
+
+.andro-quote {
+  background: var(--gold-dim);
+  border: 1px solid rgba(232,160,32,0.2);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  font-size: 15px; line-height: 1.8;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.andro-quote .author {
+  font-size: 12px; color: var(--gold);
+  opacity: 0.6; margin-top: 10px;
+}
+
+.principles-list { display: flex; flex-direction: column; gap: 12px; }
+
+.principle-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.principle-item:hover { border-color: var(--border2); }
+
+.principle-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 20px; cursor: pointer;
+}
+
+.principle-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--gold-dim);
+  border: 1px solid rgba(232,160,32,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--gold);
+  flex-shrink: 0;
+}
+
+.principle-name {
+  font-size: 14px; font-weight: 600; flex: 1;
+}
+
+.principle-arrow {
+  font-size: 10px; color: var(--text3);
+  transition: transform .2s;
+}
+.principle-item.open .principle-arrow { transform: rotate(180deg); }
+
+.principle-body {
+  display: none; padding: 0 20px 18px;
+  font-size: 13px; color: var(--text2); line-height: 1.8;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+.principle-item.open .principle-body { display: block; }
+
+/* ─── KOLB VISUAL ─── */
+.kolb-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px; margin-top: 8px;
+}
+
+.kolb-diagram {
+  grid-column: 1 / -1;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  padding: 40px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
+}
+
+.kolb-svg { width: 100%; max-width: 480px; height: auto; }
+
+.kolb-stage {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px; cursor: pointer;
+  transition: all .2s;
+}
+.kolb-stage:hover { border-color: var(--border2); }
+.kolb-stage.active { border-color: var(--gold); background: var(--gold-dim); }
+.kolb-stage .st-num { font-size: 10px; color: var(--text3); margin-bottom: 4px; letter-spacing: 1px; }
+.kolb-stage .st-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.kolb-stage .st-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+/* ─── VS TABLE ─── */
+.vs-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0; align-items: center;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  overflow: hidden;
+}
+
+.vs-col { padding: 32px 28px; }
+.vs-col.left { border-left: 1px solid var(--border); }
+.vs-col h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+.vs-divider {
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px 0;
+  font-size: 13px; font-weight: 700; color: var(--text3);
+  writing-mode: vertical-rl;
+  letter-spacing: 3px;
+}
+
+.vs-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+}
+.vs-item:last-child { border-bottom: none; }
+.vs-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+
+/* ─── GAME SECTION ─── */
+.game-wrapper {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  overflow: hidden;
+}
+
+.game-header {
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+
+.game-title { font-size: 18px; font-weight: 700; }
+.game-meta { display: flex; gap: 20px; align-items: center; }
+
+.game-stat {
+  text-align: center;
+}
+.game-stat .gs-val { font-size: 20px; font-weight: 800; color: var(--gold); }
+.game-stat .gs-lbl { font-size: 10px; color: var(--text3); letter-spacing: 1px; }
+
+.game-tabs {
+  display: flex; gap: 4px;
+  padding: 20px 32px 0;
+}
+
+.gtab {
+  padding: 8px 20px; border-radius: 8px 8px 0 0;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  background: transparent; color: var(--text3);
+  border: 1px solid transparent; border-bottom: none;
+  transition: all .2s;
+  font-family: 'Cairo', sans-serif;
+}
+.gtab.active {
+  background: var(--bg3); color: var(--text);
+  border-color: var(--border);
+}
+
+.game-content { padding: 28px 32px 32px; background: var(--bg3); }
+
+/* ─── MATCH GAME ─── */
+.match-instructions {
+  font-size: 13px; color: var(--text2);
+  margin-bottom: 24px; line-height: 1.7;
+  padding: 14px 18px;
+  background: var(--bg2); border-radius: var(--r);
+  border: 1px solid var(--border);
+}
+
+.match-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.match-col-title {
+  font-size: 11px; color: var(--text3);
+  letter-spacing: 2px; font-weight: 600;
+  margin-bottom: 12px; text-transform: uppercase;
+}
+
+.match-items { display: flex; flex-direction: column; gap: 8px; }
+
+.match-card {
+  padding: 14px 18px;
+  background: var(--bg2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  font-size: 13px; line-height: 1.6;
+  cursor: pointer;
+  transition: all .2s;
+  user-select: none;
+  position: relative;
+}
+
+.match-card:hover { border-color: var(--border2); }
+.match-card.selected {
+  border-color: var(--gold);
+  background: var(--gold-dim);
+  color: var(--gold);
+}
+.match-card.correct {
+  border-color: var(--teal);
+  background: var(--teal-dim);
+  color: var(--teal);
+  cursor: default;
+}
+.match-card.wrong {
+  border-color: var(--rose);
+  background: var(--rose-dim);
+  animation: shake .3s ease;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.match-check { font-size: 14px; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); }
+
+/* ─── MEMORY GAME ─── */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.mem-card {
+  aspect-ratio: 1;
+  cursor: pointer;
+  perspective: 600px;
+}
+
+.mem-inner {
+  width: 100%; height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .5s;
+  border-radius: var(--r);
+}
+
+.mem-card.flipped .mem-inner { transform: rotateY(180deg); }
+.mem-card.matched .mem-inner { transform: rotateY(180deg); }
+
+.mem-front, .mem-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--r);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; text-align: center; padding: 10px;
+  line-height: 1.5;
+}
+
+.mem-front {
+  background: var(--bg2);
+  border: 1.5px solid var(--border);
+  font-size: 24px; color: var(--text3);
+}
+
+.mem-front:hover { border-color: var(--border2); }
+
+.mem-back {
+  background: var(--bg2);
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
+  transform: rotateY(180deg);
+  font-size: 11px;
+}
+
+.mem-card.matched .mem-back {
+  border-color: var(--teal);
+  background: var(--teal-dim);
+  color: var(--teal);
+}
+
+/* ─── CHALLENGE GAME ─── */
+.challenge-q {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  font-size: 15px; line-height: 1.8; font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.challenge-opts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 20px;
+}
+
+.challenge-opt {
+  padding: 14px 18px;
+  background: var(--bg2);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  font-size: 13px; line-height: 1.6;
+  cursor: pointer; text-align: right;
+  transition: all .2s;
+  font-family: 'Cairo', sans-serif;
+  color: var(--text);
+}
+.challenge-opt:hover:not(:disabled) { border-color: var(--border2); background: rgba(255,255,255,0.04); }
+.challenge-opt:disabled { cursor: default; }
+.challenge-opt.correct { border-color: var(--teal); background: var(--teal-dim); color: var(--teal); }
+.challenge-opt.wrong { border-color: var(--rose); background: var(--rose-dim); color: var(--rose); }
+
+.challenge-feedback {
+  padding: 14px 18px;
+  border-radius: var(--r);
+  font-size: 13px; line-height: 1.7;
+  display: none;
+  margin-bottom: 16px;
+}
+.challenge-feedback.show { display: block; }
+.challenge-feedback.good { background: var(--teal-dim); border: 1px solid var(--teal); color: var(--teal); }
+.challenge-feedback.bad { background: var(--rose-dim); border: 1px solid var(--rose); color: var(--rose); }
+
+.challenge-progress {
+  display: flex; gap: 6px; margin-bottom: 20px;
+}
+.cp-dot {
+  height: 4px; flex: 1; border-radius: 2px;
+  background: var(--bg);
+  transition: background .3s;
+}
+.cp-dot.done { background: var(--teal); }
+.cp-dot.current { background: var(--gold); }
+
+.game-btns {
+  display: flex; gap: 10px; flex-wrap: wrap;
+}
+
+.game-btn {
+  padding: 10px 22px; border-radius: 50px;
+  background: var(--gold); color: #0a0a0f;
+  font-family: 'Cairo', sans-serif;
+  font-size: 13px; font-weight: 700;
+  border: none; cursor: pointer;
+  transition: all .2s;
+}
+.game-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(232,160,32,0.3); }
+.game-btn.secondary {
+  background: transparent; color: var(--text2);
+  border: 1px solid var(--border2);
+}
+.game-btn.secondary:hover { background: var(--bg2); }
+
+/* ─── SCORE SCREEN ─── */
+.score-screen {
+  text-align: center; padding: 40px 20px;
+  display: none;
+}
+.score-screen.show { display: block; }
+.score-circle {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: conic-gradient(var(--gold) 0%, var(--bg) 0%);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px;
+  position: relative;
+}
+.score-circle-inner {
+  width: 76px; height: 76px; border-radius: 50%;
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 800; color: var(--gold);
+}
+.score-msg { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+.score-sub { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 28px; }
+
+/* ─── NEURO SECTION ─── */
+.neuro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.neuro-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px;
+  transition: all .2s;
+}
+.neuro-card:hover { transform: translateY(-3px); border-color: var(--border2); }
+.neuro-card .nc-icon { font-size: 28px; margin-bottom: 12px; }
+.neuro-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.neuro-card p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 48px;
+  text-align: center;
+  font-size: 13px; color: var(--text3);
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  section { padding: 60px 20px; }
+  .andro-layout { grid-template-columns: 1fr; }
+  .andro-info { position: static; }
+  .kolb-container { grid-template-columns: 1fr; }
+  .vs-wrapper { grid-template-columns: 1fr; }
+  .vs-divider { writing-mode: horizontal-tb; padding: 10px; }
+  .match-layout { grid-template-columns: 1fr; }
+  .challenge-opts { grid-template-columns: 1fr; }
+  .memory-grid { grid-template-columns: repeat(3, 1fr); }
+  .game-header { flex-direction: column; }
+  .game-content { padding: 20px 16px 24px; }
+  .hero h1 { letter-spacing: -1px; }
+  .hero { padding: 100px 24px 60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-logo">🎓 تعلم الكبار</div>
+  <div class="nav-links">
+    <a href="#theories">النظريات</a>
+    <a href="#andragogy">الأندراغوجيا</a>
+    <a href="#kolb">كولب</a>
+    <a href="#game">اللعبة</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
+  <div class="badge">من كتاب The Adult Learner — Knowles & Holton</div>
+
+  <h1>اكتشف عالَم<br><span>تعلم الكبار</span></h1>
+
+  <p>الكبار لا يتعلموا مثل الأطفال. نظريات علمية رائدة تشرح كيف يتعلم الإنسان البالغ، وكيف تبني تجربة تعليمية حقيقية.</p>
+
+  <div class="hero-btns">
+    <a href="#theories" class="btn-primary">ابدأ الرحلة</a>
+    <a href="#game" class="btn-outline">العب وتعلم 🎮</a>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat"><div class="num">5</div><div class="lbl">نظريات أساسية</div></div>
+    <div class="stat"><div class="num">6</div><div class="lbl">مبادئ الأندراغوجيا</div></div>
+    <div class="stat"><div class="num">3</div><div class="lbl">ألعاب تفاعلية</div></div>
+    <div class="stat"><div class="num">50+</div><div class="lbl">سنة بحث علمي</div></div>
+  </div>
+</div>
+
+<!-- ─── THEORIES OVERVIEW ─── -->
+<section id="theories">
+  <div class="reveal">
+    <div class="section-tag">نظرة عامة</div>
+    <h2 class="section-title">أبرز نظريات تعلم الكبار</h2>
+    <p class="section-sub">من الأندراغوجيا إلى علم الأعصاب — كل نظرية تضيف بُعدًا جديدًا لفهم كيف يتعلم الإنسان البالغ.</p>
+  </div>
+
+  <div class="theories-grid">
+    <div class="theory-card reveal" style="--accent-color: var(--gold)" onclick="scrollTo('#andragogy')">
+      <div class="theory-num">النظرية 01</div>
+      <span class="theory-icon">🧭</span>
+      <h3>الأندراغوجيا</h3>
+      <p>نظرية مالكم نولز — فن وعلم مساعدة الكبار على التعلم. ستة مبادئ تشكل أساس تعليم الكبار حول العالم.</p>
+    </div>
+
+    <div class="theory-card reveal" style="--accent-color: var(--teal)" onclick="document.getElementById('kolb').scrollIntoView({behavior:'smooth'})">
+      <div class="theory-num">النظرية 02</div>
+      <span class="theory-icon">🔄</span>
+      <h3>التعلم التجريبي — كولب</h3>
+      <p>دورة التعلم من التجربة المباشرة إلى الاستخلاص المفاهيمي. التعلم الحقيقي يأتي من الفعل لا من القراءة فقط.</p>
+    </div>
+
+    <div class="theory-card reveal" style="--accent-color: var(--violet)">
+      <div class="theory-num">النظرية 03</div>
+      <span class="theory-icon">🔍</span>
+      <h3>التعلم التحويلي — ميزيرو</h3>
+      <p>التعلم العميق يغيّر منظور المتعلم نحو العالم. الأزمات والأسئلة الوجودية تحرّك التعلم الحقيقي.</p>
+    </div>
+
+    <div class="theory-card reveal" style="--accent-color: var(--rose)">
+      <div class="theory-num">النظرية 04</div>
+      <span class="theory-icon">🧠</span>
+      <h3>نيوروأندراغوجي</h3>
+      <p>ما يقوله علم الأعصاب عن دماغ البالغ وقدرته المذهلة على التعلم — علم الأعصاب يؤكد ما قاله نولز حدسيًا.</p>
+    </div>
+
+    <div class="theory-card reveal" style="--accent-color: var(--gold2)">
+      <div class="theory-num">النظرية 05</div>
+      <span class="theory-icon">🗺️</span>
+      <h3>التعلم الذاتي الموجّه</h3>
+      <p>الكبار يتعلموا أفضل حين يتحكموا في مسيرتهم التعليمية. المتعلم يضع أهدافه، يختار موارده، ويقيّم تقدمه.</p>
+    </div>
+
+    <div class="theory-card reveal" style="--accent-color: var(--teal)">
+      <div class="theory-num">مقارنة</div>
+      <span class="theory-icon">⚖️</span>
+      <h3>بيداغوجيا vs أندراغوجيا</h3>
+      <p>الفرق الجوهري بين تعليم الأطفال والكبار ليس في السن فقط — بل في الفلسفة كلها. المعلم أم المتعلم هو المحور؟</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ANDRAGOGY ─── -->
+<section id="andragogy" style="max-width:1200px">
+  <div class="andro-layout">
+    <div class="andro-info">
+      <div class="reveal">
+        <div class="section-tag">النظرية الأساسية</div>
+        <h2 class="section-title">الأندراغوجيا</h2>
+        <p class="section-sub" style="margin-bottom:24px">مالكم نولز — أبو تعلم الكبار في أمريكا</p>
+      </div>
+
+      <div class="andro-quote reveal">
+        "أندراغوجيا محاولة صادقة للتركيز على المتعلم. إنها بديل لمنهجية التصميم التعليمي المتمحورة حول المحتوى."
+        <div class="author">— فور وجربر، 1988</div>
+      </div>
+
+      <div class="reveal" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;font-size:13px;color:var(--text2);line-height:1.8">
+        <strong style="color:var(--text);display:block;margin-bottom:8px">ما هي الأندراغوجيا؟</strong>
+        كلمة يونانية الأصل: <span style="color:var(--gold)">Andro</span> = رجل/كبار + <span style="color:var(--gold)">Agogy</span> = قيادة/تعليم. قدّمها نولز عام 1970 كنموذج بديل لتعليم الأطفال، يضع المتعلم البالغ في مركز العملية التعليمية.
+      </div>
+    </div>
+
+    <div>
+      <p class="reveal" style="font-size:13px;color:var(--text2);margin-bottom:16px">اضغط على كل مبدأ لتعرف أكثر:</p>
+      <div class="principles-list reveal">
+
+        <div class="principle-item" onclick="togglePrinciple(this)">
+          <div class="principle-header">
+            <div class="principle-num">1</div>
+            <div class="principle-name">الحاجة للمعرفة</div>
+            <div class="principle-arrow">▼</div>
+          </div>
+          <div class="principle-body">
+            الكبار يحتاجون يعرفوا <strong>ليه</strong> يتعلموا هذا الشيء، و<strong>ماذا</strong> سيتعلموا، و<strong>كيف</strong> سيفيدهم — قبل أن يبدأوا. لو لم تشرح لهم الهدف والفائدة، لن تحصل على انتباههم. ابدأ دائمًا بـ "لماذا هذا مهم لك".
+          </div>
+        </div>
+
+        <div class="principle-item" onclick="togglePrinciple(this)">
+          <div class="principle-header">
+            <div class="principle-num">2</div>
+            <div class="principle-name">مفهوم الذات الموجَّهة</div>
+            <div class="principle-arrow">▼</div>
+          </div>
+          <div class="principle-body">
+            الكبار يرون أنفسهم مسؤولين عن قراراتهم وحياتهم. هم يرفضون الشعور بأنهم يُعامَلون كأطفال. التعلم الذي يمنحهم استقلالية وتحكمًا يكون أكثر فاعلية وقبولًا — التوجيه الذاتي ليس خيارًا، هو حاجة نفسية عميقة.
+          </div>
+        </div>
+
+        <div class="principle-item" onclick="togglePrinciple(this)">
+          <div class="principle-header">
+            <div class="principle-num">3</div>
+            <div class="principle-name">الخبرة السابقة</div>
+            <div class="principle-arrow">▼</div>
+          </div>
+          <div class="principle-body">
+            الكبار يأتون بثروة من الخبرات الحياتية — هذه كنز لا عبء. التعلم المبني على ما يعرفونه بالفعل يكون أعمق وأسرع. لكن انتبه: بعض الخبرات السابقة قد تكون أفكارًا مغلوطة تحتاج إعادة بناء.
+          </div>
+        </div>
+
+        <div class="principle-item" onclick="togglePrinciple(this)">
+          <div class="principle-header">
+            <div class="principle-num">4</div>
+            <div class="principle-name">الاستعداد للتعلم</div>
+            <div class="principle-arrow">▼</div>
+          </div>
+          <div class="principle-body">
+            الكبار يصبحون مستعدين للتعلم حين يواجهون تحديًا حياتيًا حقيقيًا. التعلم يحصل في "اللحظة المناسبة". المدير الجديد مستعد لتعلم القيادة الآن، لا قبل منحه المنصب بخمس سنوات. الوقت هو عنصر المعادلة الخفي.
+          </div>
+        </div>
+
+        <div class="principle-item" onclick="togglePrinciple(this)">
+          <div class="principle-header">
+            <div class="principle-num">5</div>
+            <div class="principle-name">التوجه لحل المشكلات</div>
+            <div class="principle-arrow">▼</div>
+          </div>
+          <div class="principle-body">
+            الأطفال يتعلموا مواد دراسية. الكبار يتعلموا لحل مشاكل حقيقية في حياتهم. التعلم المرتبط بموقف واقعي وتحدٍّ فعلي يُعالجونه أكثر تأثيرًا من التعلم النظري المجرد.
+          </div>
+        </div>
+
+        <div class="principle-item" onclick="togglePrinciple(this)">
+          <div class="principle-header">
+            <div class="principle-num">6</div>
+            <div class="principle-name">الدافع للتعلم</div>
+            <div class="principle-arrow">▼</div>
+          </div>
+          <div class="principle-body">
+            أقوى دوافع الكبار <strong>داخلية</strong> — رغبة في التطور، الرضا الشخصي، جودة الحياة. الدوافع الخارجية (راتب، ترقية) تُشغّل لكنها لا تُلهم. الدافع الداخلي هو الذي يجعل المتعلم يتابع ويصمد ويستمر.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- VS TABLE -->
+  <div style="margin-top:80px" class="reveal">
+    <div class="section-tag">مقارنة</div>
+    <h2 class="section-title" style="margin-bottom:32px">بيداغوجيا vs أندراغوجيا</h2>
+
+    <div class="vs-wrapper">
+      <div class="vs-col">
+        <h3 style="color:var(--text2)">📚 البيداغوجيا (الأطفال)</h3>
+        <div class="vs-item"><div class="vs-dot" style="background:var(--text3)"></div>المعلم يقرر المحتوى والأهداف</div>
+        <div class="vs-item"><div class="vs-dot" style="background:var(--text3)"></div>المتعلم يعتمد على المعلم</div>
+        <div class="vs-item"><div class="vs-dot" style="background:var(--text3)"></div>خبرة المتعلم محدودة القيمة</div>
+        <div class="vs-item"><div class="vs-dot" style="background:var(--text3)"></div>تعلم مواد دراسية منهجية</div>
+        <div class="vs-item"><div class="vs-dot" style="background:var(--text3)"></div>الدافع خارجي (علامات وعقوبات)</div>
+        <div class="vs-item"><div class="vs-dot" style="background:var(--text3)"></div>المتعلم متلقٍّ سلبي</div>
+      </div>
+
+      <div class="vs-divider">VS</div>
+
+      <div class="vs-col left">
+        <h3 style="color:var(--gold)">🧭 الأندراغوجيا (الكبار)</h3>
+        <div class="vs-item"><div class="vs-dot" style="background:var(--gold)"></div>المتعلم يشارك في تحديد احتياجاته</div>
+        <div class="vs-item"><div class="vs-dot" style="background:var(--gold)"></div>التعلم ذاتي موجَّه مستقل</div>
+        <div class="vs-item"><div class="vs-dot" style="background:var(--gold)"></div>الخبرة مصدر تعلم ثري</div>
+        <div class="vs-item"><div class="vs-dot" style="background:var(--gold)"></div>تعلم لحل مشاكل الحياة الفعلية</div>
+        <div class="vs-item"><div class="vs-dot" style="background:var(--gold)"></div>الدافع داخلي (رغبة في التطور)</div>
+        <div class="vs-item"><div class="vs-dot" style="background:var(--gold)"></div>المتعلم نشط ومشارك فاعل</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── KOLB ─── -->
+<section id="kolb">
+  <div class="reveal">
+    <div class="section-tag">دورة التعلم</div>
+    <h2 class="section-title">التعلم التجريبي — كولب</h2>
+    <p class="section-sub">ديفيد كولب، 1984 · التعلم الحقيقي يأتي من التجربة</p>
+  </div>
+
+  <div class="kolb-container reveal">
+    <div class="kolb-diagram">
+      <svg class="kolb-svg" viewBox="0 0 400 360">
+        <defs>
+          <marker id="arrowK" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+          </marker>
+        </defs>
+        <!-- Cycle arrows -->
+        <path d="M 200 70 A 110 110 0 0 1 310 180" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrowK)"/>
+        <path d="M 310 195 A 110 110 0 0 1 200 310" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrowK)"/>
+        <path d="M 190 310 A 110 110 0 0 1 90 195" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrowK)"/>
+        <path d="M 90 180 A 110 110 0 0 1 190 70" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#arrowK)"/>
+
+        <!-- Stage 1 Top -->
+        <rect x="130" y="20" width="140" height="52" rx="10" fill="#17171f" stroke="rgba(232,160,32,0.5)" stroke-width="1.5"/>
+        <text x="200" y="42" text-anchor="middle" font-family="Cairo" font-size="13" font-weight="700" fill="#e8a020">التجربة المباشرة</text>
+        <text x="200" y="58" text-anchor="middle" font-family="Cairo" font-size="10" fill="rgba(232,160,32,0.6)">أعمل وأجرّب</text>
+
+        <!-- Stage 2 Right -->
+        <rect x="300" y="154" width="88" height="52" rx="10" fill="#17171f" stroke="rgba(45,212,191,0.5)" stroke-width="1.5"/>
+        <text x="344" y="174" text-anchor="middle" font-family="Cairo" font-size="12" font-weight="700" fill="#2dd4bf">التأمل</text>
+        <text x="344" y="190" text-anchor="middle" font-family="Cairo" font-size="10" fill="rgba(45,212,191,0.6)">أراقب وأفكر</text>
+
+        <!-- Stage 3 Bottom -->
+        <rect x="130" y="288" width="140" height="52" rx="10" fill="#17171f" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
+        <text x="200" y="308" text-anchor="middle" font-family="Cairo" font-size="12" font-weight="700" fill="#a78bfa">الاستخلاص</text>
+        <text x="200" y="324" text-anchor="middle" font-family="Cairo" font-size="10" fill="rgba(167,139,250,0.6)">أستنتج مبادئ</text>
+
+        <!-- Stage 4 Left -->
+        <rect x="12" y="154" width="88" height="52" rx="10" fill="#17171f" stroke="rgba(251,113,133,0.5)" stroke-width="1.5"/>
+        <text x="56" y="174" text-anchor="middle" font-family="Cairo" font-size="12" font-weight="700" fill="#fb7185">التجريب</text>
+        <text x="56" y="190" text-anchor="middle" font-family="Cairo" font-size="10" fill="rgba(251,113,133,0.6)">أطبّق وأختبر</text>
+
+        <!-- Center -->
+        <circle cx="200" cy="190" r="36" fill="rgba(232,160,32,0.06)" stroke="rgba(232,160,32,0.2)" stroke-width="1"/>
+        <text x="200" y="185" text-anchor="middle" font-family="Cairo" font-size="10" fill="rgba(255,255,255,0.4)">دورة</text>
+        <text x="200" y="200" text-anchor="middle" font-family="Cairo" font-size="10" fill="rgba(255,255,255,0.4)">التعلم</text>
+      </svg>
+    </div>
+
+    <div class="kolb-stage" data-stage="0" onclick="activateKolb(0)">
+      <div class="st-num">المرحلة 1</div>
+      <div class="st-title" style="color:var(--gold)">التجربة المباشرة</div>
+      <div class="st-desc">تعمل الشيء فعليًا وتعيشه بنفسك. ليس قراءة عنه أو مشاهدة فيديو — بل الانخراط الكامل في التجربة الحية.</div>
+    </div>
+
+    <div class="kolb-stage" data-stage="1" onclick="activateKolb(1)">
+      <div class="st-num">المرحلة 2</div>
+      <div class="st-title" style="color:var(--teal)">التأمل والملاحظة</div>
+      <div class="st-desc">توقف وتتأمل: ماذا حدث؟ ماذا نجح وماذا فشل؟ كيف شعرت؟ ما الذي لاحظته؟ التأمل يحوّل التجربة إلى معرفة.</div>
+    </div>
+
+    <div class="kolb-stage" data-stage="2" onclick="activateKolb(2)">
+      <div class="st-num">المرحلة 3</div>
+      <div class="st-title" style="color:var(--violet)">الاستخلاص المفاهيمي</div>
+      <div class="st-desc">تبني فهمًا ومبادئ عامة من تجربتك. لماذا حدث هذا؟ ما القاعدة التي يمكن استخلاصها لتطبيقها مستقبلًا؟</div>
+    </div>
+
+    <div class="kolb-stage" data-stage="3" onclick="activateKolb(3)">
+      <div class="st-num">المرحلة 4</div>
+      <div class="st-title" style="color:var(--rose)">التجريب الفعال</div>
+      <div class="st-desc">تختبر المبادئ الجديدة في مواقف مختلفة. هذا التجريب يُفضي إلى تجربة مباشرة جديدة — وتبدأ الدورة من جديد.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── NEUROSCIENCE ─── -->
+<section id="neuro">
+  <div class="reveal">
+    <div class="section-tag">علم الأعصاب</div>
+    <h2 class="section-title">ماذا يقول دماغك؟</h2>
+    <p class="section-sub">أبحاث علم الأعصاب الحديثة أكّدت ما قاله نولز بشكل حدسي — الدماغ البالغ له خصائص تعلّمية مذهلة.</p>
+  </div>
+
+  <div class="neuro-grid">
+    <div class="neuro-card reveal">
+      <div class="nc-icon">🔄</div>
+      <h4>المرونة العصبية</h4>
+      <p>الدماغ البالغ يستطيع تكوين اتصالات عصبية جديدة طوال العمر. التعلم يُغيّر الدماغ فيزيائيًا — هذا ما يُسمى Neuroplasticity.</p>
+    </div>
+
+    <div class="neuro-card reveal">
+      <div class="nc-icon">😊</div>
+      <h4>المشاعر مفتاح التعلم</h4>
+      <p>المشاعر الإيجابية تنشّط اللوزة المخيخية وتفتح الدماغ للتعلم. الخوف والضغط يُفعّلان استجابة Fight-or-Flight وتغلق مناطق التفكير العليا.</p>
+    </div>
+
+    <div class="neuro-card reveal">
+      <div class="nc-icon">🔗</div>
+      <h4>الربط بالخبرة يُعمّق التعلم</h4>
+      <p>الهيبوكامبس يربط المعلومات الجديدة بالذكريات القديمة. كلما كانت الصلة أقوى، كان الحفظ أعمق وأكثر استمرارًا.</p>
+    </div>
+
+    <div class="neuro-card reveal">
+      <div class="nc-icon">😴</div>
+      <h4>النوم يُرسّخ التعلم</h4>
+      <p>خلال النوم، الدماغ يُعيد معالجة وتوحيد المعلومات الجديدة. التوزيع على أيام (Spaced Repetition) أقوى بكثير من المذاكرة المكثفة في جلسة واحدة.</p>
+    </div>
+
+    <div class="neuro-card reveal">
+      <div class="nc-icon">🎯</div>
+      <h4>المعنى الشخصي يُبقّي التعلم</h4>
+      <p>قشرة الفص الجبهي تُعطي الأولوية للمعلومات ذات الصلة الشخصية. ما يعني المتعلم شخصيًا لا يُنسى — ما لا يعنيه يُحذف.</p>
+    </div>
+
+    <div class="neuro-card reveal">
+      <div class="nc-icon">👥</div>
+      <h4>خلايا المرايا والتعلم الاجتماعي</h4>
+      <p>المرايا العصبية (Mirror Neurons) تجعل التعلم بالمشاهدة والمحاكاة فعّالًا بيولوجيًا. التعلم الجماعي ليس ترفًا — هو آلية عصبية.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GAME ─── -->
+<section id="game">
+  <div class="reveal">
+    <div class="section-tag">تفاعل وتعلم</div>
+    <h2 class="section-title">العب وتعلم 🎮</h2>
+    <p class="section-sub">ثلاث ألعاب تفاعلية تختبر فهمك وتُرسّخ المعلومات بطريقة ممتعة.</p>
+  </div>
+
+  <div class="game-wrapper reveal">
+    <div class="game-header">
+      <div>
+        <div class="game-title">مركز الألعاب التعليمية</div>
+        <div style="font-size:12px;color:var(--text3);margin-top:3px">اختر لعبتك المفضلة</div>
+      </div>
+      <div class="game-meta">
+        <div class="game-stat"><div class="gs-val" id="total-score">0</div><div class="gs-lbl">النقاط</div></div>
+        <div class="game-stat"><div class="gs-val" id="total-correct">0</div><div class="gs-lbl">صحيح</div></div>
+      </div>
+    </div>
+
+    <div class="game-tabs">
+      <button class="gtab active" onclick="switchGame('match', this)">🔗 وصل المبادئ</button>
+      <button class="gtab" onclick="switchGame('memory', this)">🃏 لعبة الذاكرة</button>
+      <button class="gtab" onclick="switchGame('challenge', this)">⚡ تحدي السرعة</button>
+    </div>
+
+    <!-- ─── MATCH GAME ─── -->
+    <div id="game-match" class="game-content">
+      <div class="match-instructions">
+        <strong style="color:var(--text)">كيف تلعب:</strong> اضغط على مبدأ من العمود الأيمن، ثم اضغط على تعريفه المناسب في العمود الأيسر. لكل تطابق صحيح ستحصل على 10 نقاط! 🎯
+      </div>
+      <div id="match-content"></div>
+      <div class="game-btns" style="margin-top:20px">
+        <button class="game-btn" onclick="initMatch()">🔄 جولة جديدة</button>
+        <button class="game-btn secondary" id="match-hint-btn" onclick="matchHint()">💡 تلميح</button>
+      </div>
+    </div>
+
+    <!-- ─── MEMORY GAME ─── -->
+    <div id="game-memory" class="game-content" style="display:none">
+      <div class="match-instructions" style="margin-bottom:16px">
+        <strong style="color:var(--text)">لعبة الذاكرة:</strong> اكشف بطاقتين في كل مرة. إذا كانت البطاقتان متطابقتَين (مصطلح وتعريفه) تبقيان مكشوفتين. أكمل كل الأزواج للفوز! 🃏
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+        <span style="font-size:12px;color:var(--text3)">المحاولات: <strong id="mem-tries" style="color:var(--gold)">0</strong></span>
+        <span style="font-size:12px;color:var(--text3)">تم إيجاده: <strong id="mem-found" style="color:var(--teal)">0</strong> / 6</span>
+      </div>
+      <div class="memory-grid" id="memory-grid"></div>
+      <div class="game-btns" style="margin-top:20px">
+        <button class="game-btn" onclick="initMemory()">🔄 إعادة اللعبة</button>
+      </div>
+    </div>
+
+    <!-- ─── CHALLENGE GAME ─── -->
+    <div id="game-challenge" class="game-content" style="display:none">
+      <div class="score-screen" id="challenge-score">
+        <div class="score-circle" id="score-circle-anim">
+          <div class="score-circle-inner" id="score-circle-text">0/7</div>
+        </div>
+        <div class="score-msg" id="score-msg"></div>
+        <div class="score-sub" id="score-sub"></div>
+        <div class="game-btns" style="justify-content:center">
+          <button class="game-btn" onclick="initChallenge()">🔄 العب مجددًا</button>
+        </div>
+      </div>
+      <div id="challenge-main">
+        <div class="challenge-progress" id="c-progress"></div>
+        <div class="challenge-q" id="c-question"></div>
+        <div class="challenge-opts" id="c-opts"></div>
+        <div class="challenge-feedback" id="c-feedback"></div>
+        <div class="game-btns">
+          <button class="game-btn" id="c-next-btn" onclick="nextChallenge()" style="display:none">التالي →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div style="font-size:18px;margin-bottom:8px">🎓</div>
+  <div style="color:var(--text2);margin-bottom:6px">نظريات تعلم الكبار</div>
+  <div>مبني على كتاب <em style="color:var(--gold)">The Adult Learner</em> — Knowles, Holton & Swanson — الطبعة التاسعة 2020</div>
+</footer>
+
+<script>
+/* ─── SCROLL REVEAL ─── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ─── PRINCIPLE TOGGLE ─── */
+function togglePrinciple(el) {
+  document.querySelectorAll('.principle-item').forEach(p => {
+    if(p !== el) p.classList.remove('open');
+  });
+  el.classList.toggle('open');
+}
+
+/* ─── KOLB ACTIVATE ─── */
+function activateKolb(idx) {
+  document.querySelectorAll('.kolb-stage').forEach((s,i) => {
+    s.classList.toggle('active', i === idx);
+  });
+}
+
+/* ─── GAME SWITCH ─── */
+function switchGame(name, btn) {
+  document.querySelectorAll('.gtab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('game-match').style.display = name === 'match' ? 'block' : 'none';
+  document.getElementById('game-memory').style.display = name === 'memory' ? 'block' : 'none';
+  document.getElementById('game-challenge').style.display = name === 'challenge' ? 'block' : 'none';
+  if(name === 'memory') initMemory();
+  if(name === 'challenge') initChallenge();
+}
+
+/* ─── SCORES ─── */
+let totalScore = 0, totalCorrect = 0;
+function addScore(pts, correct=true) {
+  totalScore += pts;
+  if(correct) totalCorrect++;
+  document.getElementById('total-score').textContent = totalScore;
+  document.getElementById('total-correct').textContent = totalCorrect;
+}
+
+/* ═══════════════════════════════════════
+   MATCH GAME
+═══════════════════════════════════════ */
+const matchData = [
+  { principle: "الحاجة للمعرفة", def: "يعرف ليه يتعلم قبل ما يبدأ" },
+  { principle: "مفهوم الذات", def: "يرى نفسه مسؤولًا وموجِّهًا لتعلمه" },
+  { principle: "الخبرة السابقة", def: "يجيء بخبرات حياتية تُثري التعلم" },
+  { principle: "الاستعداد للتعلم", def: "يتعلم حين يواجه تحديًا حياتيًا فعليًا" },
+  { principle: "التوجه لحل المشكلات", def: "يتعلم ليحل مشكلة واقعية لا لحفظ مادة" },
+  { principle: "الدافع الداخلي", def: "تحركه رغبة شخصية عميقة في النمو" }
+];
+
+let matchSelected = null, matchPairs = {}, matchCompleted = 0;
+
+function initMatch() {
+  matchSelected = null; matchPairs = {}; matchCompleted = 0;
+  document.getElementById('match-hint-btn').disabled = false;
+
+  const shuffledPrincs = shuffle([...matchData]);
+  const shuffledDefs = shuffle([...matchData]);
+
+  const html = `
+    <div class="match-layout">
+      <div>
+        <div class="match-col-title">المبادئ</div>
+        <div class="match-items" id="match-principles">
+          ${shuffledPrincs.map((d,i) => `
+            <div class="match-card" id="mp-${i}" data-key="${d.principle}" data-type="principle" onclick="matchClick(this)">
+              ${d.principle}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div>
+        <div class="match-col-title">التعريفات</div>
+        <div class="match-items" id="match-defs">
+          ${shuffledDefs.map((d,i) => `
+            <div class="match-card" id="md-${i}" data-key="${d.principle}" data-type="def" onclick="matchClick(this)">
+              ${d.def}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+  document.getElementById('match-content').innerHTML = html;
+}
+
+function matchClick(el) {
+  if(el.classList.contains('correct')) return;
+
+  if(!matchSelected) {
+    document.querySelectorAll('.match-card.selected').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    matchSelected = el;
+  } else {
+    if(matchSelected === el) { el.classList.remove('selected'); matchSelected = null; return; }
+    if(matchSelected.dataset.type === el.dataset.type) {
+      matchSelected.classList.remove('selected');
+      matchSelected = el; el.classList.add('selected'); return;
+    }
+    if(matchSelected.dataset.key === el.dataset.key) {
+      matchSelected.classList.remove('selected');
+      matchSelected.classList.add('correct');
+      el.classList.add('correct');
+      matchCompleted++;
+      addScore(10);
+      if(matchCompleted === matchData.length) {
+        setTimeout(() => {
+          document.getElementById('match-content').innerHTML +=
+            `<div style="text-align:center;padding:20px;font-size:15px;color:var(--teal);font-weight:700">🎉 أحسنت! أكملت جميع الأزواج!</div>`;
+        }, 400);
+      }
+    } else {
+      el.classList.add('wrong');
+      matchSelected.classList.add('wrong');
+      matchSelected.classList.remove('selected');
+      setTimeout(() => {
+        el.classList.remove('wrong');
+        matchSelected && matchSelected.classList.remove('wrong');
+        matchSelected = null;
+      }, 600);
+      matchSelected = null;
+      return;
+    }
+    matchSelected = null;
+  }
+}
+
+function matchHint() {
+  const unmatched = [...document.querySelectorAll('.match-card:not(.correct)')];
+  if(!unmatched.length) return;
+  const principals = unmatched.filter(c => c.dataset.type === 'principle');
+  if(!principals.length) return;
+  const target = principals[0];
+  target.style.boxShadow = '0 0 0 2px var(--gold)';
+  setTimeout(() => target.style.boxShadow = '', 1500);
+}
+
+/* ═══════════════════════════════════════
+   MEMORY GAME
+═══════════════════════════════════════ */
+const memoryPairs = [
+  { term: "أندراغوجيا", def: "تعليم الكبار بتوجيه ذاتي" },
+  { term: "بيداغوجيا", def: "التعليم المتمحور حول المعلم" },
+  { term: "كولب", def: "دورة التعلم التجريبي" },
+  { term: "نولز", def: "أبو تعلم الكبار في أمريكا" },
+  { term: "المرونة العصبية", def: "قدرة الدماغ على التغيير مدى الحياة" },
+  { term: "التعلم التحويلي", def: "تعلم يغيّر منظور المتعلم" },
+];
+
+let memFlipped = [], memMatched = 0, memTries = 0, memLocked = false;
+
+function initMemory() {
+  memFlipped = []; memMatched = 0; memTries = 0; memLocked = false;
+  document.getElementById('mem-tries').textContent = '0';
+  document.getElementById('mem-found').textContent = '0';
+
+  const cards = [];
+  memoryPairs.forEach((p, i) => {
+    cards.push({ id: i*2,   pairId: i, text: p.term, isBack: false });
+    cards.push({ id: i*2+1, pairId: i, text: p.def,  isBack: true  });
+  });
+  shuffle(cards);
+
+  document.getElementById('memory-grid').innerHTML = cards.map(c => `
+    <div class="mem-card" id="mc-${c.id}" data-pair="${c.pairId}" onclick="memFlip(this, ${c.id})">
+      <div class="mem-inner">
+        <div class="mem-front">❓</div>
+        <div class="mem-back">${c.text}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function memFlip(el, id) {
+  if(memLocked || el.classList.contains('flipped') || el.classList.contains('matched')) return;
+  el.classList.add('flipped');
+  memFlipped.push(el);
+  if(memFlipped.length === 2) {
+    memTries++;
+    document.getElementById('mem-tries').textContent = memTries;
+    memLocked = true;
+    const [a, b] = memFlipped;
+    if(a.dataset.pair === b.dataset.pair) {
+      a.classList.add('matched'); b.classList.add('matched');
+      memMatched++;
+      document.getElementById('mem-found').textContent = memMatched;
+      addScore(15);
+      memFlipped = []; memLocked = false;
+      if(memMatched === memoryPairs.length) {
+        setTimeout(() => {
+          document.getElementById('memory-grid').insertAdjacentHTML('afterend',
+            `<div style="text-align:center;padding:24px;font-size:16px;color:var(--teal);font-weight:700;margin-top:16px">🎉 ممتاز! أكملت اللعبة في ${memTries} محاولة!</div>`);
+        }, 500);
+      }
+    } else {
+      setTimeout(() => {
+        a.classList.remove('flipped'); b.classList.remove('flipped');
+        memFlipped = []; memLocked = false;
+      }, 1000);
+    }
+  }
+}
+
+/* ═══════════════════════════════════════
+   CHALLENGE GAME
+═══════════════════════════════════════ */
+const challengeQs = [
+  {
+    q: "ما هو المبدأ الأول في الأندراغوجيا وفق نولز؟",
+    opts: ["الدافع الداخلي", "الحاجة للمعرفة", "الخبرة السابقة", "الاستعداد للتعلم"],
+    ans: 1, expl: "المبدأ الأول هو 'الحاجة للمعرفة' — الكبير يحتاج يعرف ليه يتعلم هذا الشيء قبل أن يبدأ."
+  },
+  {
+    q: "في دورة كولب، ماذا يفعل المتعلم في مرحلة 'التأمل والملاحظة'؟",
+    opts: ["يُطبّق مبادئ جديدة", "يبني نظريات مجردة", "يراقب ويفكر فيما حدث", "يبدأ تجربة جديدة"],
+    ans: 2, expl: "في مرحلة التأمل، يتوقف المتعلم ليراقب ويفكر: ماذا حدث؟ ما الذي نجح وما الذي فشل؟"
+  },
+  {
+    q: "ما الفرق الجوهري بين البيداغوجيا والأندراغوجيا؟",
+    opts: ["الأندراغوجيا للكبار والتعلم فيها ذاتي التوجيه", "البيداغوجيا للكبار والأندراغوجيا للأطفال", "لا فرق بينهما جوهريًا", "الأندراغوجيا أصعب من البيداغوجيا"],
+    ans: 0, expl: "الأندراغوجيا للكبار وتضع المتعلم في المركز مع توجيه ذاتي، بعكس البيداغوجيا التي تُمركز المعلم."
+  },
+  {
+    q: "ماذا يقول علم الأعصاب عن المشاعر وتعلم الكبار؟",
+    opts: ["يجب إزالة المشاعر لزيادة التركيز", "المشاعر الإيجابية تفتح الدماغ للتعلم", "المشاعر السلبية تحفز التعلم أكثر", "المشاعر لا تؤثر على التعلم"],
+    ans: 1, expl: "أبحاث الأعصاب تُثبت أن البيئة الإيجابية تنشّط مناطق التعلم، بينما الخوف والضغط يُغلقان التفكير العليا."
+  },
+  {
+    q: "وفق الأندراغوجيا، متى يكون الكبير 'مستعدًا للتعلم'؟",
+    opts: ["عندما يُجبَر على ذلك", "عندما يواجه تحديًا حياتيًا حقيقيًا", "في سن محدد", "عندما يحصل على حافز مالي"],
+    ans: 1, expl: "المبدأ الرابع يقول: الكبار يستعدون للتعلم حين يواجهون تحديًا فعليًا في حياتهم — التوقيت أساسي."
+  },
+  {
+    q: "ما هي 'المرونة العصبية' في سياق تعلم الكبار؟",
+    opts: ["قدرة الدماغ على التغيير وبناء اتصالات جديدة طوال العمر", "سرعة الاستجابة للمعلومات الجديدة", "مرونة الجدول الزمني للتعلم", "القدرة على التعلم في بيئات مختلفة"],
+    ans: 0, expl: "Neuroplasticity هي قدرة الدماغ على إنشاء وإعادة بناء الاتصالات العصبية مدى الحياة — التعلم يُغيّر الدماغ فيزيائيًا."
+  },
+  {
+    q: "لو بتدرّب موظفين على نظام جديد — أي مقاربة تتوافق مع الأندراغوجيا؟",
+    opts: ["شرح كل خطوة بالتسلسل ثم الاختبار", "سؤالهم عن مشاكلهم الفعلية والبناء عليها", "إعطاؤهم كتاباً وتركهم يقرأون", "التركيز على المحتوى النظري أولًا"],
+    ans: 1, expl: "الأندراغوجيا تبدأ من مشاكل الحياة الواقعية (مبدأ التوجه لحل المشكلات) وتبني التعلم عليها."
+  }
+];
+
+let cCur = 0, cScore = 0, cAnswered = false;
+
+function initChallenge() {
+  cCur = 0; cScore = 0; cAnswered = false;
+  document.getElementById('challenge-score').classList.remove('show');
+  document.getElementById('challenge-main').style.display = 'block';
+  renderChallenge();
+}
+
+function renderChallenge() {
+  const q = challengeQs[cCur];
+  // Progress
+  document.getElementById('c-progress').innerHTML = challengeQs.map((_,i) =>
+    `<div class="cp-dot ${i < cCur ? 'done' : i === cCur ? 'current' : ''}"></div>`
+  ).join('');
+  // Question
+  document.getElementById('c-question').textContent = q.q;
+  // Feedback
+  const fb = document.getElementById('c-feedback');
+  fb.className = 'challenge-feedback'; fb.textContent = '';
+  document.getElementById('c-next-btn').style.display = 'none';
+  cAnswered = false;
+  // Options
+  document.getElementById('c-opts').innerHTML = q.opts.map((o,i) =>
+    `<button class="challenge-opt" onclick="answerChallenge(${i})">${o}</button>`
+  ).join('');
+}
+
+function answerChallenge(i) {
+  if(cAnswered) return; cAnswered = true;
+  const q = challengeQs[cCur];
+  const btns = document.querySelectorAll('.challenge-opt');
+  btns.forEach(b => b.disabled = true);
+  btns[i].classList.add(i === q.ans ? 'correct' : 'wrong');
+  btns[q.ans].classList.add('correct');
+  const fb = document.getElementById('c-feedback');
+  if(i === q.ans) {
+    cScore++; addScore(12);
+    fb.className = 'challenge-feedback show good';
+    fb.textContent = '✓ ممتاز! ' + q.expl;
+  } else {
+    fb.className = 'challenge-feedback show bad';
+    fb.textContent = '✗ ليس تمامًا. ' + q.expl;
+  }
+  if(cCur < challengeQs.length - 1) {
+    document.getElementById('c-next-btn').style.display = 'inline-flex';
+  } else {
+    setTimeout(showChallengeScore, 1200);
+  }
+}
+
+function nextChallenge() {
+  cCur++; renderChallenge();
+}
+
+function showChallengeScore() {
+  document.getElementById('challenge-main').style.display = 'none';
+  const sc = document.getElementById('challenge-score');
+  sc.classList.add('show');
+  const pct = Math.round(cScore / challengeQs.length * 100);
+  const circle = document.getElementById('score-circle-anim');
+  circle.style.background = `conic-gradient(var(--gold) ${pct * 3.6}deg, var(--bg) ${pct * 3.6}deg)`;
+  document.getElementById('score-circle-text').textContent = `${cScore}/${challengeQs.length}`;
+  const msgs = [
+    [0, 3, "واصل المحاولة!", "مراجعة النظريات مرة أخرى ستساعدك كثيرًا."],
+    [4, 5, "أداء جيد!", "أنت على الطريق الصحيح. راجع المبادئ التي أخطأت فيها."],
+    [6, 7, "رائع! أحسنت! 🎉", "فهمك ممتاز. أنت تستوعب نظريات تعلم الكبار بشكل احترافي!"]
+  ];
+  const [,, msg, sub] = msgs.find(([a,b]) => cScore >= a && cScore <= b) || msgs[2];
+  document.getElementById('score-msg').textContent = msg;
+  document.getElementById('score-sub').textContent = sub;
+}
+
+/* ─── UTILS ─── */
+function shuffle(arr) {
+  for(let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+/* ─── INIT ─── */
+initMatch();
+activateKolb(0);
+</script>
+</body>
+</html>
